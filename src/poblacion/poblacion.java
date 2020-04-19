@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import genetica.gen;
-import model.funcion;
+import model.algoritmo;
 
 public class poblacion {
 	
 	private List<individuo> poblacion;
 	private int tam;
-	private funcion fun;
+	private algoritmo fun;
 	private double best;
 	
-	public poblacion(int tam, funcion f) {
+	public poblacion(int tam, algoritmo f) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
 		fun=f;
@@ -81,7 +81,7 @@ public class poblacion {
 		poblacion.remove(poblacion.size()-1);
 	}
 
-	public funcion getFuncion() {
+	public algoritmo getFuncion() {
 		return fun;
 	}
 	public void iniBest() {

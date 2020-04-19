@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -16,7 +16,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		super("ruleta");
 		probSeleccion=new ArrayList<Double>();
 	}
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		probSeleccion=new ArrayList<Double>();
 		iniSeleccionados(p);
 		asignarProbabilidades(p);
@@ -24,7 +24,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		getSeleccionados().iniBest();
 		return getSeleccionados();
 	}
-	public void seleccionar(poblacion p, funcion f) {
+	public void seleccionar(poblacion p, algoritmo f) {
 		Random r=new Random();
 		for(int j=0; j < p.getSize(); j++) {
 			double valor=r.nextDouble() % 1;

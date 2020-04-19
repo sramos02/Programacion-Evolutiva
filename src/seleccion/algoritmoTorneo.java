@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -17,8 +17,8 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 		this.k=3;
 		ring=new ArrayList<individuo>();
 	}
-	public abstract poblacion ini(poblacion p, funcion fun);
-	public void seleccionar(poblacion p, funcion fun) {
+	public abstract poblacion ini(poblacion p, algoritmo fun);
+	public void seleccionar(poblacion p, algoritmo fun) {
 		Random r=new Random();
 		int luchador;
 		for(int i=0; i < p.getSize(); i++) {
@@ -29,7 +29,7 @@ public abstract class algoritmoTorneo extends algoritmoSeleccion{
 			luchar(fun);
 		}
 	}
-	public void luchar(funcion fun) {
+	public void luchar(algoritmo fun) {
 		int ganador=0;
 		for(int i=1; i < getK(); i++) {
 			if(fun.best(getFromRing(i).getFitness(), getFromRing(ganador).getFitness())){

@@ -1,7 +1,7 @@
 package seleccion;
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.poblacion;
 
 public class algoritmoTorneoDeter extends algoritmoTorneo{
@@ -11,7 +11,7 @@ public class algoritmoTorneoDeter extends algoritmoTorneo{
 		// TODO Auto-generated constructor stub
 	}
 
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		iniSeleccionados(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();

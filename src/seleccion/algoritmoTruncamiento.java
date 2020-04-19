@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -15,7 +15,7 @@ public class algoritmoTruncamiento extends algoritmoSeleccion{
 		super("truncamiento");
 	}
 	@Override
-	public void seleccionar(poblacion p, funcion f) {
+	public void seleccionar(poblacion p, algoritmo f) {
 		List<individuo> aux=new ArrayList<individuo>();
 		//Copia los individuos 
 		for(int i=0; i < p.getSize(); i++) {
@@ -45,7 +45,7 @@ public class algoritmoTruncamiento extends algoritmoSeleccion{
 	}
 
 	@Override
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		iniSeleccionados(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();

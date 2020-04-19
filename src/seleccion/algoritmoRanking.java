@@ -1,6 +1,6 @@
 package seleccion;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -11,7 +11,7 @@ public class algoritmoRanking extends algoritmoSeleccion {
 	}
 
 	@Override
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		iniSeleccionados(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();
@@ -19,7 +19,7 @@ public class algoritmoRanking extends algoritmoSeleccion {
 	}
 
 	@Override
-	public void seleccionar(poblacion p, funcion f) {
+	public void seleccionar(poblacion p, algoritmo f) {
 		//Ordenamos por fitness
 		ordenaFitness(p);
 		

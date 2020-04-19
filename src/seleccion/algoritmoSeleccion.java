@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import poblacion.individuo;
 import poblacion.poblacion;
-import model.funcion;
+import model.algoritmo;
 
 public abstract class algoritmoSeleccion {
 	private poblacion seleccionados;
@@ -28,8 +28,8 @@ public abstract class algoritmoSeleccion {
 		}
 		return null;
 	}
-	public abstract void seleccionar(poblacion p, funcion f);
-	public abstract poblacion ini(poblacion p, funcion f);
+	public abstract void seleccionar(poblacion p, algoritmo f);
+	public abstract poblacion ini(poblacion p, algoritmo f);
 	
 	public String getName() {
 		return name;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
@@ -17,7 +17,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 		super("estocastico");
 		probSeleccion=new ArrayList<Double>();
 	}
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		probSeleccion=new ArrayList<Double>();
 		iniSeleccionados(p);
 		asignarProbabilidades(p);
@@ -27,7 +27,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 		return getSeleccionados();
 	}
 	@Override
-	public void seleccionar(poblacion p, funcion f) {
+	public void seleccionar(poblacion p, algoritmo f) {
 		int j=0;
 		Random rand=new Random();
 		double r;

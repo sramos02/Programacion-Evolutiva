@@ -2,7 +2,7 @@ package seleccion;
 
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -15,7 +15,7 @@ public class algotirmoOtro extends algoritmoSeleccion {
 	@Override
 	//Elige el siguiente en base a un random, no controla repeticiones. Es una intención de Bogo sort 
 	//aplicada a la selección
-	public void seleccionar(poblacion p, funcion f) {
+	public void seleccionar(poblacion p, algoritmo f) {
 		Random r=new Random();
 		int anterior = 0;
 		
@@ -28,7 +28,7 @@ public class algotirmoOtro extends algoritmoSeleccion {
 	}
 
 	@Override
-	public poblacion ini(poblacion p, funcion f) {
+	public poblacion ini(poblacion p, algoritmo f) {
 		iniSeleccionados(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();

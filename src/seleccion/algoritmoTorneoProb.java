@@ -2,7 +2,7 @@ package seleccion;
 
 import java.util.Random;
 
-import model.funcion;
+import model.algoritmo;
 import poblacion.individuo;
 import poblacion.poblacion;
 
@@ -16,7 +16,7 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	private double p;
 	
 	@Override
-	public void luchar(funcion fun) {
+	public void luchar(algoritmo fun) {
 		Random r=new Random();
 		double intervalo=r.nextDouble()%1;
 		if(intervalo > p) {
@@ -36,7 +36,7 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	}
 
 	@Override
-	public poblacion ini(poblacion pob, funcion fun) {
+	public poblacion ini(poblacion pob, algoritmo fun) {
 		p=Math.abs(Math.random()%1);
 		iniSeleccionados(pob);
 		seleccionar(pob, fun);

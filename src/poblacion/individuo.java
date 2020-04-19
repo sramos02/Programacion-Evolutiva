@@ -5,15 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import genetica.gen;
-import model.funcion;
+import model.algoritmo;
 
 public class individuo {
 	
 	private List<gen> cromosoma;
 	private double fitness;
-	private funcion f;
+	private algoritmo f;
 	
-	public individuo(funcion f) {
+	public individuo(algoritmo f) {
 		this.f=f;
 		cromosoma=new ArrayList<gen>();
 		crearGenes(f);
@@ -33,7 +33,7 @@ public class individuo {
 	public individuo() {}
 
 	/**Crea todos los genes*/
-	public void crearGenes(funcion f) {
+	public void crearGenes(algoritmo f) {
 		int valor, tam=f.getSize();
 		for(int i=0; i < tam; i++ ) {
 			valor=random(tam);
@@ -93,7 +93,7 @@ public class individuo {
 	public List<gen> getCromosoma(){
 			return cromosoma;
 	}
-	public funcion getFuncion() {
+	public algoritmo getFuncion() {
 		return f;
 	}
 	

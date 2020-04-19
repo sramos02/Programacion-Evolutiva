@@ -31,12 +31,12 @@ public class manager {
 	private double best [][];
 	private List<Integer> bestVars;;
 	private mutacion algMut;
-	private funcion funcion;
+	private algoritmo funcion;
 	private double probElite;
 	private double probCruc;
 	private double probMut;	
 	private int generation;
-	private funcion copiaFuncion;
+	private algoritmo copiaFuncion;
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
@@ -44,7 +44,7 @@ public class manager {
 	public manager() {
 		observers=new ArrayList<observer>();
 		bestVars=new ArrayList<Integer>();
-		funcion=new funcion();
+		funcion=new algoritmo();
 		elite=new elite();
 		iniciarDatos();
 	}
@@ -273,7 +273,7 @@ public class manager {
 		}
 	}
 	private void restore() {
-		funcion=new funcion(copiaFuncion);
+		funcion=new algoritmo(copiaFuncion);
 	}
 	public void setObservers(List<observer> obs) {
 		observers=new ArrayList<observer>();
@@ -282,7 +282,7 @@ public class manager {
 		}
 	}
 	private void save() {
-		copiaFuncion=new funcion(this.funcion);
+		copiaFuncion=new algoritmo(this.funcion);
 	}
 }
 
