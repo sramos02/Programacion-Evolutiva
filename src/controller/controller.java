@@ -63,4 +63,7 @@ public class controller {
 	public void useIfs(boolean b) {
 		manager.useIfs(b);
 	}
+	public void prof(Integer i) {
+		manager.setProf(i);
+	}
 }

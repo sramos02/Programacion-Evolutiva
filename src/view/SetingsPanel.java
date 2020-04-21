@@ -35,11 +35,13 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private controller ctrl;
 	
+	private String [] prof = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
 	private String [] listaInit = {"Completa", "Ramped&Half", "Creciente"};
 	private String [] listaMut= {"SubArbol", "Contraccion", "Expansion", "Permutacion", "Terminal"};
 	private String [] listaCruz= {"Intercambio"};
 	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
 	
+	private JComboBox<String> profundidad;
 	private JComboBox<String> selectInit;
 	private JComboBox<String> selectSelect;
 	private JComboBox<String> selectCross;
@@ -50,7 +52,6 @@ public class SetingsPanel extends JPanel implements observer{
 	private JTextField tElite;
 	private JTextField tPopul;
 	private JTextField tMut;
-	private JTextField tInit;
 	private JCheckBox checkIf;
 	
 	private Dimension dim1;
@@ -62,6 +63,8 @@ public class SetingsPanel extends JPanel implements observer{
 	private double mutPer;
 	
 	private JPanel init1;
+	private JPanel init2;
+	private JPanel init3;
 	private JPanel cross1;
 	private JPanel mut1;
 	private JPanel loadPanel;
@@ -69,6 +72,7 @@ public class SetingsPanel extends JPanel implements observer{
 	private int genNum;
 
 	private double tolPer;
+
 	
 	public SetingsPanel(controller ctlr) {
 		this.ctrl = ctlr;
@@ -142,17 +146,28 @@ public class SetingsPanel extends JPanel implements observer{
 		 
 		 //Init----------------------------------------------------
 		 JPanel initPanel=new JPanel(new FlowLayout());
-		 initPanel.setPreferredSize(new Dimension(180, 100));
-		 initPanel.setMinimumSize(new Dimension(180, 100));
-		 initPanel.setMaximumSize(new Dimension(180, 100));
+		 initPanel.setPreferredSize(new Dimension(180, 130));
+		 initPanel.setMinimumSize(new Dimension(180, 130));
+		 initPanel.setMaximumSize(new Dimension(180, 130));		 
+		 initPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createSoftBevelBorder(PROPERTIES), "Initialization"));
+
 		 init1 = new JPanel();
 		 BoxLayout box01 = new BoxLayout(init1, BoxLayout.X_AXIS);
-		 initPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createSoftBevelBorder(PROPERTIES), "Initialization"));
 		 JLabel lInit = new JLabel("Init");
 		 setDimLabel(lInit, dim2);
 		 init1.add(lInit);
+		 changeInit(listaInit);
+		 initPanel.add(init1);
+
 		 
-		 JPanel check = new JPanel();		 
+		 init2 = new JPanel();
+		 JLabel lInit2 = new JLabel("Profundidad");
+		 setDimLabel(lInit2, dim2);
+		 init2.add(lInit2);		 
+		 changeProf(prof);
+		 initPanel.add(init2);
+
+		 JPanel init3 = new JPanel();		 
 		 checkIf = new JCheckBox("Use of Ifs");
 		 checkIf.addItemListener(new ItemListener() {
 	            @Override
@@ -160,13 +175,9 @@ public class SetingsPanel extends JPanel implements observer{
 	                useIfs(e.getStateChange() == ItemEvent.SELECTED);
 	            }
 	        });
-		 check.add(checkIf);
+		 init3.add(checkIf);
+		 initPanel.add(init3);
 		 
-		 //checkIf = new JCheckBox();	 
-		 changeInit(listaInit);
-		 
-		 initPanel.add(init1);
-		 initPanel.add(check);
 		 this.add(initPanel);
 		 
 		 //CrossOver----------------------------------------------------
@@ -203,7 +214,8 @@ public class SetingsPanel extends JPanel implements observer{
 		 
 		 crossOverPanel.add(cross2);
 		 this.add(crossOverPanel);
-	 
+
+		 
 		 //Mutation----------------------------------------------------
 		 JPanel mutationPanel=new JPanel(new FlowLayout());
 		 mutationPanel.setPreferredSize(new Dimension(180, 100));
@@ -383,6 +395,30 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	
 	
+	private void changeProf(String[] prof2) {
+		if(profundidad != null)
+			init2.remove(selectMut);
+		profundidad = new JComboBox<String>(prof2);
+		profundidad.setEditable(false);
+		prof(prof2[0]);
+		profundidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				prof((String)profundidad.getSelectedItem());
+			}
+		 });
+		setDimCombobox(profundidad, dim2);
+		init2.add(profundidad);
+		init2.validate();
+		init2.repaint();
+		this.repaint();
+	}
+
+	
+	private void prof(String i) {
+		ctrl.prof(Integer.parseInt(i));
+	}
+
+
 	private void changeInit(String[] selec) {
 		if(selectInit!=null)
 			init1.remove(selectMut);

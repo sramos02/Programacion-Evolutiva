@@ -47,7 +47,9 @@ public class manager {
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
+	
 	private boolean useIfs;
+	private int profundidad;
 
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -244,6 +246,9 @@ public class manager {
 	}
 	public void useIfs(boolean b) {
 		useIfs = b;
+	}
+	public void setProf(Integer i) {
+		profundidad = i;
 	}
 }
 

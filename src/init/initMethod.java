@@ -1,5 +1,6 @@
 package init;
 
-public class initMethod {
 
+public abstract class initMethod {
+	 public abstract void inicia(int profundidad);
 }
