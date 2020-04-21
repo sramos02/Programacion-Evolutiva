@@ -7,11 +7,15 @@ import java.util.List;
 import java.util.Scanner;
 import javax.annotation.processing.FilerException;
 import cruces.*;
-import mutacion.exchange;
-import mutacion.heuristic;
-import mutacion.insercion;
-import mutacion.inversion;
-import mutacion.metPropio;
+import init.Completa;
+import init.Creciente;
+import init.RampedHalf;
+import init.initMethod;
+import mutacion.Contraccion;
+import mutacion.Expansion;
+import mutacion.Permutacion;
+import mutacion.SubArbol;
+import mutacion.Terminal;
 import mutacion.mutacion;
 import poblacion.individuo;
 import poblacion.poblacion;
@@ -23,14 +27,17 @@ public class manager {
 	private int valorMejor;
 	private int mejorPos;
 	private List<observer> observers;
+	
 	private algoritmoSeleccion algSel;
-	private algoritmoCruce algCruce;
+	private algoritmoCruce algCruce;		
+	private mutacion algMut;
+	private initMethod algInit;
+	
 	private poblacion poblacion;
 	private double bestGen [][];
 	private double average [][];
 	private double best [][];
-	private List<Integer> bestVars;;
-	private mutacion algMut;
+	private List<Integer> bestVars;
 	private algoritmo funcion;
 	private double probElite;
 	private double probCruc;
@@ -40,6 +47,7 @@ public class manager {
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
+	private boolean useIfs;
 
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -56,6 +64,7 @@ public class manager {
 		probMut=0.02;
 		maxIter=100;
 		tamPob=100;
+		useIfs = false;
 	}
 	public void addObserver(observer o) {
 		if(!observers.contains(o)) {
@@ -180,36 +189,34 @@ public class manager {
 	}
 	public void setCrossFunct(int i) {
 		switch(i) {
-		case 0: algCruce = new pmx();
-			break;
-		case 1: algCruce = new ox();
-			break;
-		case 2:algCruce = new oxPP();
-			break;
-		case 3: algCruce = new cx();
-			break;
-		case 4: algCruce = new erx();
-			break;
-		case 5: algCruce = new ordinalCoding();
-			break;
-		case 6: algCruce=new cruces.metPropio();
+		case 0: algCruce = new Intercambio();
 			break;
 		}
 	}
 	
 	public void setMutationFunct(int i) {
 		switch(i) {
-		case 0: algMut=new insercion();
+		case 0: algMut=new SubArbol();
 			break;
-		case 1: algMut=new exchange();
+		case 1: algMut=new Contraccion();
 			break;		
-		case 2: algMut= new inversion();
+		case 2: algMut= new Expansion();
 			break;
-		case 3: algMut=new heuristic();
+		case 3: algMut=new Permutacion();
 			break;
-		case 4: algMut = new metPropio();
+		case 4: algMut = new Terminal();
 			break;
 		}
+	}
+	public void setInitFunct(int i) {
+		switch(i) {
+		case 0: algInit = new Completa();
+		break;
+		case 1: algInit = new RampedHalf();
+		break;		
+		case 2: algInit = new Creciente();
+		break;
+		}	
 	}
 	public void setMutationPercent(double mutPer) {
 		probMut=mutPer;
@@ -221,57 +228,8 @@ public class manager {
 		iniciarDatos();
 	}
 	
-	private void load(Scanner in, int [][] matrix, int tam) {
-		for(int i=0; i < tam; i++) {
-			for(int j=0; j < tam; j++) {
-				matrix[i][j]=in.nextInt();
-			}
-		}
-	}
+
 	
-	public void seleccionarFichero(String fileName) {
-		int [][] flujo;
-		int [][] distancia;
-		try(Scanner in=new Scanner(new File("ficheros/"+fileName));) 
-		{
-			try{
-				int tam=in.nextInt();
-				if(tam > 0) {
-					flujo=new int[tam][tam];
-					distancia=new int[tam][tam];
-					save();
-					load(in, distancia, tam);
-					load(in, flujo, tam);
-					funcion.cargarDatos(distancia, flujo, tam);
-					if(fileName=="ajuste.txt") {
-						valorMejor=mejores[0];
-					}if(fileName=="datos12.txt") {
-						valorMejor=mejores[1];
-					}
-					else if(fileName=="datos15.txt") {
-						valorMejor=mejores[2];
-					}
-					else if(fileName=="datos30.txt") {
-						valorMejor=mejores[3];
-					}
-					else {
-						valorMejor=0;
-					}
-				}
-				else
-				{
-					throw new FilerException("Error en la lectura del fichero");
-				}
-			}catch(FilerException | NumberFormatException e) {
-				restore();
-				System.err.println("Hay un error en el formato del fichero");
-			}
-		}
-		catch (IOException e) 
-		{
-			System.err.println("Can´t open the file");
-		}
-	}
 	private void restore() {
 		funcion=new algoritmo(copiaFuncion);
 	}
@@ -283,6 +241,9 @@ public class manager {
 	}
 	private void save() {
 		copiaFuncion=new algoritmo(this.funcion);
+	}
+	public void useIfs(boolean b) {
+		useIfs = b;
 	}
 }
 
