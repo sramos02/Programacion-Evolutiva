@@ -48,6 +48,9 @@ public class controller {
 	public void setMutationFunct(int i) {
 		manager.setMutationFunct(i);
 	}
+	public void setInitFunct(int i) {
+		manager.setInitFunct(i);
+	}
 	public void setMutationPercent(double mutPer) {
 		manager.setMutationPercent(mutPer*0.01);
 	}
@@ -57,7 +60,10 @@ public class controller {
 	public void reset() {
 		manager.reset();
 	}
-	public void seleccionarFichero(String i) {
-		manager.seleccionarFichero(i);
+	public void useIfs(boolean b) {
+		manager.useIfs(b);
+	}
+	public void prof(Integer i) {
+		manager.setProf(i);
 	}
 }
