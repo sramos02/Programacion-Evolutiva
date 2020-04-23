@@ -11,7 +11,7 @@ public class individuo {
 	
 	private List<gen> cromosoma;
 	private double fitness;
-	private algoritmo f;
+	private algoritmo f; //No se si esto sigue haciendo falta
 	
 	public individuo(algoritmo f) {
 		this.f=f;

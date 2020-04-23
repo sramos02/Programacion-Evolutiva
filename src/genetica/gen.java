@@ -1,9 +1,11 @@
 package genetica;
 
+import model.arbol;
+
 public class gen {
 	
-	private int genotipo;
-	private int fenotipo;
+	private arbol genotipo; //Esto hay que arreglarlo, lo tienes marcado tu
+	private int fenotipo; //Aqui la representación
 	
 	public gen() {}
 	public gen(int valor) {
