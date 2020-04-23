@@ -1,13 +1,14 @@
 package model;
 
 public class arbol<T> {
+	public static enum T {IF, AND, NOT, OR}
 	private T elemento=null;
 	private arbol<T> izq=null;
 	private arbol<T> der=null;
 	private arbol<T> cen=null;
 	int numNodos;
 	int profundidad;
-	
+	 
 	public arbol() {}
 	public arbol(T elemento) {
 		this.elemento=elemento;
@@ -78,6 +79,10 @@ public class arbol<T> {
 	
 	public boolean empty() {
 		return elemento==null;
+	}
+	
+	public boolean esHoja() {
+		return izq.empty() && der.empty() && cen.empty();
 	}
 	
 	public void setIzq(arbol<T> izq) {
