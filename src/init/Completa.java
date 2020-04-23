@@ -32,12 +32,10 @@ public class Completa extends initMethod{
 		}
 		
 		 boolean tipo = rand.nextBoolean();
-		 if(tipo) {
-			 //se genera operador
+		 if(tipo) { //Operador
 			 // generación del subarbol de operador
 		 }
-		 else{
-			// se genera operando
+		 else{ //Operando
 			//generación del subarbol de operando
 		 } 
 	}
