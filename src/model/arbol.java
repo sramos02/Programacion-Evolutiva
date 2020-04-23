@@ -1,11 +1,11 @@
 package model;
 
-public class arbol<T> {
+public class arbol {
 	public static enum T {IF, AND, NOT, OR}
 	private T elemento=null;
-	private arbol<T> izq=null;
-	private arbol<T> der=null;
-	private arbol<T> cen=null;
+	private arbol izq=null;
+	private arbol der=null;
+	private arbol cen=null;
 	int numNodos;
 	int profundidad;
 	 
@@ -15,14 +15,14 @@ public class arbol<T> {
 		numNodos = 1;
 		profundidad = 1;
 	}
-	public arbol(T elemento, arbol<T>izq) {
+	public arbol(T elemento, arbol izq) {
 		this.elemento=elemento;
 		this.izq=izq;
 		numNodos = izq.numNodos++;
 		profundidad = izq.profundidad++;
 	}
 	
-	public arbol(T elemento, arbol<T>izq, arbol<T>der) {
+	public arbol(T elemento, arbol izq, arbol der) {
 		this.elemento=elemento;
 		this.izq=izq;
 		this.der=der;
@@ -31,7 +31,7 @@ public class arbol<T> {
 		else profundidad = der.profundidad++;
 		
 	}
-	public arbol(T elemento, arbol<T>izq, arbol<T>der, arbol<T>cen) {
+	public arbol(T elemento, arbol izq, arbol der, arbol cen) {
 		this.elemento=elemento;
 		this.izq=izq;
 		this.der=der;
@@ -44,7 +44,7 @@ public class arbol<T> {
 		profundidad = prof;
 	}
 	
-	public arbol(arbol<T> old) {
+	public arbol(arbol  old) {
 		elemento=old.getElemento();
 		izq=old.getIzq();
 		der=old.getDer();
@@ -53,15 +53,15 @@ public class arbol<T> {
 		numNodos = old.numNodos;
 	}
 	
-	public arbol<T> getCen() {
+	public arbol getCen() {
 		return cen;
 	}
 	
-	public arbol<T> getDer() {
+	public arbol  getDer() {
 		return der;
 	}
 	
-	public arbol<T> getIzq() {
+	public arbol getIzq() {
 		return izq;
 	}
 	
@@ -85,19 +85,19 @@ public class arbol<T> {
 		return izq.empty() && der.empty() && cen.empty();
 	}
 	
-	public void setIzq(arbol<T> izq) {
+	public void setIzq(arbol izq) {
 		this.izq=izq;
 		numNodos++;
 		//profundidad ??
 	}
 	
-	public void setDer(arbol<T> der) {
+	public void setDer(arbol der) {
 		this.der=der;
 		//profundidad ??
 		numNodos++;
 	}
 	
-	public void setCen(arbol<T> cen) {
+	public void setCen(arbol cen) {
 		this.cen=cen;
 		numNodos++;
 		//profundidad ??
