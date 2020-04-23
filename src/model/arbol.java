@@ -52,7 +52,7 @@ public class arbol {
 		profundidad = old.profundidad;
 		numNodos = old.numNodos;
 	}
-	
+		
 	public arbol getCen() {
 		return cen;
 	}
@@ -101,5 +101,13 @@ public class arbol {
 		this.cen=cen;
 		numNodos++;
 		//profundidad ??
+	}
+	
+	public void setProfundidad(int prof) {
+		profundidad = prof;
+	}
+	
+	public void setNumElem(int n) {
+		numNodos = n;
 	}
 }
