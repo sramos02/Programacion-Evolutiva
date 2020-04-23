@@ -1,7 +1,7 @@
 package model;
 
 public class arbol {
-	public static enum T {IF, AND, NOT, OR}
+	
 	private T elemento=null;
 	private arbol izq=null;
 	private arbol der=null;
