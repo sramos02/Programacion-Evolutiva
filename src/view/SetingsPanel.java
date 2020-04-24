@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -24,43 +26,53 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import controller.controller;
 import model.observer;
 
 public class SetingsPanel extends JPanel implements observer{
 	
 	private controller ctrl;
-	private String [] listaMut= {"Insertion", "Exchange", "Inversion",
-			 "Heuristic", "Método propio"};
-	private String [] listaCruz= {"PMX", "OX", "OX-PP", "CX",
-			 "ERX", "Ordinal Coding","OwnCrossing"};
-	private String [] listaSelec= {"Roulette", "Determinist Tournament",
-			"Probabilistic Tournament","Stochastic", "Ranking", 
-			"Truncation", "Own Method"};
-	private String [] listaFich= {"ajuste.txt", "datos12.txt", "datos15.txt", "datos30.txt", "tai100a.txt", "tai256c.txt"};
+	
+	private String [] prof = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
+	private String [] listaInit = {"Completa", "Ramped&Half", "Creciente"};
+	private String [] listaMut= {"SubArbol", "Contraccion", "Expansion", "Permutacion", "Terminal"};
+	private String [] listaCruz= {"Intercambio"};
+	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
+	
+	private JComboBox<String> profundidad;
+	private JComboBox<String> selectInit;
 	private JComboBox<String> selectSelect;
 	private JComboBox<String> selectCross;
 	private JComboBox<String> selectMut;
-	private JComboBox<String> selectFile;
+	
 	private JTextField tNgenerat;
 	private JTextField tCross;
 	private JTextField tElite;
 	private JTextField tPopul;
 	private JTextField tMut;
-	private JTextField tTol;
+	private JCheckBox checkIf;
+	
 	private Dimension dim1;
 	private Dimension dim2;
 	private JButton start;
 	private JButton reset;
 	private double crossPer;
 	private double elitePer;
-	private double tolPer;
 	private double mutPer;
+	
+	private JPanel init1;
+	private JPanel init2;
+	private JPanel init3;
 	private JPanel cross1;
 	private JPanel mut1;
 	private JPanel loadPanel;
 	private int popSize;
 	private int genNum;
+
+	private double tolPer;
+
 	
 	public SetingsPanel(controller ctlr) {
 		this.ctrl = ctlr;
@@ -131,6 +143,43 @@ public class SetingsPanel extends JPanel implements observer{
 		 setDimCombobox(selectSelect, dim1);
 		 selectionPanel.add(selectSelect);
 		 this.add(selectionPanel);
+		 
+		 //Init----------------------------------------------------
+		 JPanel initPanel=new JPanel(new FlowLayout());
+		 initPanel.setPreferredSize(new Dimension(180, 130));
+		 initPanel.setMinimumSize(new Dimension(180, 130));
+		 initPanel.setMaximumSize(new Dimension(180, 130));		 
+		 initPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createSoftBevelBorder(PROPERTIES), "Initialization"));
+
+		 init1 = new JPanel();
+		 BoxLayout box01 = new BoxLayout(init1, BoxLayout.X_AXIS);
+		 JLabel lInit = new JLabel("Init");
+		 setDimLabel(lInit, dim2);
+		 init1.add(lInit);
+		 changeInit(listaInit);
+		 initPanel.add(init1);
+
+		 
+		 init2 = new JPanel();
+		 JLabel lInit2 = new JLabel("Profundidad");
+		 setDimLabel(lInit2, dim2);
+		 init2.add(lInit2);		 
+		 changeProf(prof);
+		 initPanel.add(init2);
+
+		 JPanel init3 = new JPanel();		 
+		 checkIf = new JCheckBox("Use of Ifs");
+		 checkIf.addItemListener(new ItemListener() {
+	            @Override
+	            public void itemStateChanged(ItemEvent e) {
+	                useIfs(e.getStateChange() == ItemEvent.SELECTED);
+	            }
+	        });
+		 init3.add(checkIf);
+		 initPanel.add(init3);
+		 
+		 this.add(initPanel);
+		 
 		 //CrossOver----------------------------------------------------
 		 JPanel crossOverPanel=new JPanel(new FlowLayout());
 		 crossOverPanel.setPreferredSize(new Dimension(180, 100));
@@ -165,7 +214,8 @@ public class SetingsPanel extends JPanel implements observer{
 		 
 		 crossOverPanel.add(cross2);
 		 this.add(crossOverPanel);
-	 
+
+		 
 		 //Mutation----------------------------------------------------
 		 JPanel mutationPanel=new JPanel(new FlowLayout());
 		 mutationPanel.setPreferredSize(new Dimension(180, 100));
@@ -198,7 +248,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 mut2.add(tMut);
 		 mutationPanel.add(mut2);
 		 this.add(mutationPanel);
-			 
+		 
 		//Elite-----------------------------------------------------
 		 JPanel elitePanel=new JPanel();
 		 elitePanel.setPreferredSize(new Dimension(180, 60));
@@ -221,26 +271,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 elitePanel.add(tElite);
 		 this.add(elitePanel);
 		 
-		//Cargar ficheros
-		 loadPanel=new JPanel(new FlowLayout());
-		 BoxLayout box8=new BoxLayout(loadPanel, BoxLayout.X_AXIS);
-		 loadPanel.setBorder(BorderFactory.createTitledBorder(
-				 BorderFactory.createSoftBevelBorder(PROPERTIES), "Load file"));
-		 loadPanel.setPreferredSize(new Dimension(180, 60));
-		 loadPanel.setMinimumSize(new Dimension(180, 60));
-		 loadPanel.setMaximumSize(new Dimension(180, 60));
-		 selectFile = new JComboBox<String>(listaFich);
-		 selectFile.setEditable(false);
-		 setDimCombobox(selectFile, dim1);
-		 seleccionarFichero(listaFich[0]);
-		 selectFile.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					seleccionarFichero((String)selectFile.getSelectedItem());
-				}
-		 });
-		 loadPanel.add(selectFile);
-		 this.add(loadPanel);
-		 
+
 		 //Botones-------------------------------------------------
 		 this.add(Box.createRigidArea(new Dimension(190, 20)));
 		 start = new JButton();
@@ -270,10 +301,11 @@ public class SetingsPanel extends JPanel implements observer{
 		 
 		this.setVisible(true);
 	}
-	
-	protected void seleccionarFichero(String selectedItem) {
-		ctrl.seleccionarFichero(selectedItem);
+
+	protected void useIfs(boolean b) {
+		ctrl.useIfs(b);
 	}
+
 
 	protected void start() {
 		setPopSize();
@@ -362,6 +394,50 @@ public class SetingsPanel extends JPanel implements observer{
 		genNum=100;
 	}
 	
+	
+	private void changeProf(String[] prof2) {
+		if(profundidad != null)
+			init2.remove(selectMut);
+		profundidad = new JComboBox<String>(prof2);
+		profundidad.setEditable(false);
+		prof(prof2[0]);
+		profundidad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				prof((String)profundidad.getSelectedItem());
+			}
+		 });
+		setDimCombobox(profundidad, dim2);
+		init2.add(profundidad);
+		init2.validate();
+		init2.repaint();
+		this.repaint();
+	}
+
+	
+	private void prof(String i) {
+		ctrl.prof(Integer.parseInt(i));
+	}
+
+
+	private void changeInit(String[] selec) {
+		if(selectInit!=null)
+			init1.remove(selectMut);
+		 selectInit = new JComboBox<String>(selec);
+		 selectInit.setEditable(false);
+		 seleccionarInit(selec[0]);
+		 selectInit.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					seleccionarInit((String)selectInit.getSelectedItem());
+				}
+		 });
+		 setDimCombobox(selectInit, dim2);
+		 init1.add(selectInit);
+		 init1.validate();
+		 init1.repaint();
+		 this.repaint();
+	}
+
+	
 	public void changeMut(String [] selec) {
 		if(selectMut!=null)
 			mut1.remove(selectMut);
@@ -401,7 +477,6 @@ public class SetingsPanel extends JPanel implements observer{
 		selectSelect.setSelectedIndex(0);
 		selectCross.setSelectedIndex(0);
 		selectMut.setSelectedIndex(0);
-		selectFile.setSelectedIndex(0);
 		tNgenerat.setText(genNum+"");
 		tCross.setText(crossPer+"");
 		tElite.setText(elitePer+"");
@@ -411,26 +486,8 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
-		case "PMX":
+		case "Intercambio":
 			ctrl.setCrossFunct(0);
-			break;
-		case "OX":
-			ctrl.setCrossFunct(1);
-			break;
-		case "OX-PP":
-			ctrl.setCrossFunct(2);
-			break;
-		case "CX":
-			ctrl.setCrossFunct(3);
-			break;
-		case "ERX":
-			ctrl.setCrossFunct(4);
-			break;
-		case "Ordinal Coding":
-			ctrl.setCrossFunct(5);
-			break;
-		case "OwnCrossing":
-			ctrl.setCrossFunct(6);
 			break;
 		default:
 			break;
@@ -467,23 +524,39 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionarMutacion(String mutacion) {
 		switch(mutacion){
-		case "Insertion":
+		case "SubArbol":
 			ctrl.setMutationFunct(0);
 			break;
-		case "Exchange":
+		case "Contraccion":
 			ctrl.setMutationFunct(1);
 			break;
-		case "Inversion":
+		case "Expansion":
 			ctrl.setMutationFunct(2);
 			break;
-		case "Heuristic":
+		case "Permutacion":
 			ctrl.setMutationFunct(3);
 			break;
-		case "Método propio":
+		case "Terminal":
 			ctrl.setMutationFunct(4);
 			break;
 			default:
 				break;
+		}
+	}
+	
+	private void seleccionarInit(String in) {
+		switch(in){
+		case "Completa":
+			ctrl.setInitFunct(0);
+			break;
+		case "Ramped&Half":
+			ctrl.setInitFunct(1);
+			break;
+		case "Creciente":
+			ctrl.setInitFunct(2);
+			break;
+		default:
+			break;
 		}
 	}
 

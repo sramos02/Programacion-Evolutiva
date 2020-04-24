@@ -3,39 +3,40 @@ package model;
 import poblacion.individuo;
 import poblacion.poblacion;
 
-public class adaptarMin extends adaptacion{
-
-	public adaptarMin(adaptacion adaptador) {
+public class adaptarMax extends adaptacion{
+	
+	public adaptarMax(adaptacion adaptador) {
 		super(adaptador);
 	}
 
-	public adaptarMin() {
+	public adaptarMax() {
 		super();
-	}
-
-	protected void ajustar(poblacion p) {
-		for(int i=0; i < p.getSize(); i++) {
-			individuo ind=p.getIndividuo(i);
-			ind.setFitness((int)(getLimit()-ind.getFitness()));
-		}
 	}
 
 	protected void establecerLimite(poblacion p) {
 		double valor=p.getIndividuo(0).getFitness();
 		for(int i=1; i < p.getSize(); i++) {
-			if(p.getIndividuo(i).getFitness() > valor) {
+			if(p.getIndividuo(i).getFitness() < valor) {
 				valor=p.getIndividuo(i).getFitness();
 			}
 		}
 		valor=valor * getC();
 		setLimit(valor);
 	}
+
+	@Override
+	protected void ajustar(poblacion p) {
+		for(int i=0; i < p.getSize(); i++) {
+			individuo ind=p.getIndividuo(i);
+			ind.setFitness((int)(getLimit() + ind.getFitness()));
+		}
+	}
 	
 	public void deshacer(poblacion p) {
 		setAdaptado(false);
 		double valor;
 		for(int i=0; i < p.getSize(); i++) {
-			valor=getLimit() - p.getIndividuo(i).getFitness();
+			valor=p.getIndividuo(i).getFitness() - getLimit();
 			p.getIndividuo(i).setFitness((int)valor);
 		}
 	}
