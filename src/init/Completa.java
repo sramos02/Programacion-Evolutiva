@@ -4,6 +4,7 @@ import java.util.Random;
 
 import model.T;
 import model.arbol;
+import model.element;
 
 public class Completa extends initMethod{
 	
@@ -44,7 +45,7 @@ public class Completa extends initMethod{
 	}
 
 		
-	private arbol construir_arbol(T operador, arbol izq, int i, int j) {
+	private arbol construir_arbol(element operador, arbol izq, int i, int j) {
 		// TODO Auto-generated method stub
 		return null;
 	}

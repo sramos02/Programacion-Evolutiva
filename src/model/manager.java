@@ -75,7 +75,7 @@ public class manager {
 	}
 
 	public void iniciarPoblacion() {
-		poblacion=new poblacion(tamPob, funcion);
+		poblacion=new poblacion(tamPob, funcion, algInit);
 		poblacion.iniciarPoblacion();
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
@@ -135,7 +135,7 @@ public class manager {
 			bestVars.add((int) best[1][generation]);
 			individuo mejor=poblacion.getMejorInd();
 			for(int i=0; i < mejor.getSizeCromosoma(); i++) {
-				bestVars.add(mejor.getCromosomaAt(i).getFenotipo());
+				//bestVars.add(mejor.getCromosomaAt(i).getFenotipo());
 			}
 		}
 		else

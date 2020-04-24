@@ -1,13 +1,15 @@
 package model;
 
-	int numNodos;
-	int profundidad;
+import java.util.List;
+
 public class arbol {
 	private element elemento=null;
 	private arbol izq=null;
 	private arbol der=null; 
 	private arbol cen=null;
 	private algoritmo algoritmo;
+	int numNodos;
+	int profundidad;
 	
 	public arbol() {}
 	public arbol(element elemento) {
@@ -104,10 +106,11 @@ public class arbol {
 		return elemento==null;
 	}
 	
-	public void setIzq(arbol izq) {
 	public boolean esHoja() {
 		return izq.empty() && der.empty() && cen.empty();
 	}
+	
+	public void setIzq(arbol izq) {
 		this.izq=izq;
 		numNodos++;
 		int nueva = this.izq.profundidad + izq.profundidad;
@@ -134,15 +137,12 @@ public class arbol {
 	public void setNumElem(int n) {
 		numNodos = n;
 	}
-	public String representa() {
-		if(esHoja()) ret += elemento.toString();
-		String ret = "";
+	public void representa(List<element> ret) {
+		if(esHoja()) ret.add(elemento);
 		else {
-			if(der != null) ret += der.representa();
-			if(izq != null) ret += izq.representa();
-			if(cen != null) ret += cen.representa();
+			if(der != null) der.representa(ret);
+			if(izq != null) izq.representa(ret);
+			if(cen != null) cen.representa(ret);
 		}
-		
-		return ret;
 	}
 }

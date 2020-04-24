@@ -4,48 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import genetica.gen;
+import genetica.genes;
+import init.initMethod;
 import model.algoritmo;
 
 public class individuo {
 	
-	private List<gen> cromosoma;
-	private double fitness;
-	private algoritmo f; //No se si esto sigue haciendo falta
+	private genes cromosoma;
+	private int fitness;
+	private algoritmo f;
+	private initMethod algInit;
 	
-	public individuo(algoritmo f) {
+	public individuo(algoritmo f, initMethod algInit) {
 		this.f = f;
-		cromosoma = new ArrayList<gen>();
-		crearGenes(f);
+		this.algInit=algInit;
+		cromosoma = new genes(algInit);
 		calcularFitness(); 
 	}
 	
 	public individuo(individuo ind) {
-		this.f = ind.getFuncion();
-		cromosoma = new ArrayList<gen>();
-		for(int i = 0; i < ind.getCromosoma().size(); i++) {
-			cromosoma.add(new gen(ind.getCromosoma().get(i)));
-		}
+		this.f = ind.getAlgoritmo();
+		this.algInit=ind.getAlgInit();
+		cromosoma = new genes(ind.getCromosoma());
 		fitness = ind.getFitness();
 	}
 
-	//Constructor vacio
-	public individuo() {}
-
-	/**Crea todos los genes*/
-	public void crearGenes(algoritmo f) {
-		int valor;
-		int tam = f.getSize();
-		
-		//TODO AQUI UTILIZA METODO INIT
-		
-		/*for(int i = 0; i < tam; i++ ) {
-			valor = random(tam);
-			while(existeGen(valor, i))  {
-				valor = random(tam);
-			}
-			cromosoma.add(new gen(valor));
-		}*/
+	private initMethod getAlgInit() {
+		return algInit;
 	}
 	
 	private int random(int max) {
@@ -53,17 +38,6 @@ public class individuo {
 		int valor;
 		valor=Math.abs(r.nextInt() % max);
 		return valor;
-	}
-	private boolean existeGen(int valor, int i) {
-		boolean existe=false;
-		int j=i-1;
-		if(j >=0) {
-			while(j >= 0 && cromosoma.get(j).getFenotipo() != valor) {
-				j--;
-			}
-			existe= (j >=0);
-		}
-		return existe;
 	}
 
 	/**Transforma un n�mero en base 2 a un n�mero en base 10*/
@@ -81,43 +55,35 @@ public class individuo {
 		return Math.log(x) / Math.log(2);
 	}
 
-	public double getFitness() {
+	public int getFitness() {
 		return fitness;
 	}
 	
 	
 	public void calcularFitness() {
-		List<Integer> fen=new ArrayList<Integer>();
-		for(int i=0; i < cromosoma.size(); i++) {
-			fen.add(cromosoma.get(i).getFenotipo());
-		}
-		this.fitness=f.calcularFuncion(fen);
+		this.fitness=f.calcularFuncion(cromosoma.getFenotipo());
 	}
 	
-	public List<gen> getCromosoma(){
+	public genes getCromosoma(){
 			return cromosoma;
 	}
-	public algoritmo getFuncion() {
+	public algoritmo getAlgoritmo() {
 		return f;
 	}
 	
-	public gen getCromosomaAt(int i) {
-		return cromosoma.get(i);
-	}
-	
-	public void setGen(int i, gen gen) {
-		this.cromosoma.set(i, gen);
+	public void setGen(genes gen) {
+		cromosoma=gen;
 	}
 	
 	public int getSizeCromosoma(){
 		return cromosoma.size();
 	}
 
-	public void setFitness(double d) {
+	public void setFitness(int d) {
 		fitness=d;
 	}
 	
-	public boolean existeGen(gen gen) {
+	/*public boolean existeGen(gen gen) {
 		int i=0;
 		while(i < getSizeCromosoma() && 
 				cromosoma.get(i).getGenotipo() != 
@@ -153,5 +119,5 @@ public class individuo {
 
 	public void add(gen elem) {
 		cromosoma.add(elem);
-	}
+	}*/
 }
