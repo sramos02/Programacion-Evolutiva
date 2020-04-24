@@ -4,32 +4,33 @@ import model.arbol;
 
 public class gen {
 	
-	private arbol genotipo; //Esto hay que arreglarlo, lo tienes marcado tu
-	private int fenotipo; //Aqui la representación
+	private arbol genotipo; 
+	private String fenotipo;
 	
 	public gen() {}
-	public gen(int valor) {
+	public gen(arbol valor) {
 		genotipo=valor;
-		fenotipo=valor;
+		fenotipo = valor.representa();
 	}
 	
 	public gen(gen gen) {
-		fenotipo=gen.getFenotipo();
+		fenotipo = gen.getFenotipo();
 		genotipo=gen.getGenotipo();
 	}
+	
 	public int getSizeGenotipo(){
-		return 1;
+		return genotipo.getProfundidad();
 	}
 	
-	public int getFenotipo() {
+	public String getFenotipo() {
 		return fenotipo;
 	}
 	
-	public int getGenotipo() {
+	public arbol getGenotipo() {
 		return genotipo;
 	}
-	public void setFenotipo(int d) {
-		fenotipo=d;
-		genotipo=fenotipo;
+	public void setFenotipo(String d) {
+		fenotipo = d;
+		//Crea arbol
 	}
 }

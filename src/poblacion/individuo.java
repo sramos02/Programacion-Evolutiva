@@ -14,19 +14,19 @@ public class individuo {
 	private algoritmo f; //No se si esto sigue haciendo falta
 	
 	public individuo(algoritmo f) {
-		this.f=f;
-		cromosoma=new ArrayList<gen>();
+		this.f = f;
+		cromosoma = new ArrayList<gen>();
 		crearGenes(f);
 		calcularFitness(); 
 	}
 	
 	public individuo(individuo ind) {
-		this.f=ind.getFuncion();
-		cromosoma=new ArrayList<gen>();
-		for(int i=0; i<ind.getCromosoma().size(); i++) {
+		this.f = ind.getFuncion();
+		cromosoma = new ArrayList<gen>();
+		for(int i = 0; i < ind.getCromosoma().size(); i++) {
 			cromosoma.add(new gen(ind.getCromosoma().get(i)));
 		}
-		fitness=ind.getFitness();
+		fitness = ind.getFitness();
 	}
 
 	//Constructor vacio
@@ -34,14 +34,18 @@ public class individuo {
 
 	/**Crea todos los genes*/
 	public void crearGenes(algoritmo f) {
-		int valor, tam=f.getSize();
-		for(int i=0; i < tam; i++ ) {
-			valor=random(tam);
+		int valor;
+		int tam = f.getSize();
+		
+		//TODO AQUI UTILIZA METODO INIT
+		
+		/*for(int i = 0; i < tam; i++ ) {
+			valor = random(tam);
 			while(existeGen(valor, i))  {
-				valor=random(tam);
+				valor = random(tam);
 			}
 			cromosoma.add(new gen(valor));
-		}
+		}*/
 	}
 	
 	private int random(int max) {

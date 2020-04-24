@@ -14,11 +14,14 @@ public class Completa extends initMethod{
 		
 		if(prof_min > 0) { //No puede ser hoja
 			T operador = escogeTipoAleatorio(useIfs, rand);
-			//tree.dato = operador;		
+			//tree.dato = operador;
+			
 			tree.setIzq(construir_arbol(operador, tree.getIzq(), prof_min - 1, prof_max - 1));
 			tree.setNumElem(tree.numElem() + tree.getIzq().numElem()); 
+			
 			tree.setDer(construir_arbol(operador, tree.getDer(), prof_min - 1, prof_max - 1));
 			tree.setNumElem(tree.numElem() + tree.getDer().numElem());
+			
 			if(useIfs) {
 				tree.setCen(construir_arbol(operador, tree.getCen(), prof_min - 1, prof_max - 1));
 				tree.setNumElem(tree.numElem() + tree.getCen().numElem()); 

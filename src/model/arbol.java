@@ -85,22 +85,32 @@ public class arbol {
 		return izq.empty() && der.empty() && cen.empty();
 	}
 	
+	
+	
+	
+	//Tengo dudas sobre como está implementada la profundidad, creo que no está bien
+	
+	
+	
 	public void setIzq(arbol izq) {
 		this.izq=izq;
 		numNodos++;
-		//profundidad ??
+		int nueva = this.izq.profundidad + izq.profundidad;
+		if(nueva >= cen.profundidad && nueva >= der.profundidad) profundidad = nueva;
 	}
 	
 	public void setDer(arbol der) {
 		this.der=der;
-		//profundidad ??
 		numNodos++;
+		int nueva = this.der.profundidad + der.profundidad;
+		if(nueva >= cen.profundidad && nueva >= izq.profundidad) profundidad = nueva;
 	}
 	
 	public void setCen(arbol cen) {
 		this.cen=cen;
 		numNodos++;
-		//profundidad ??
+		int nueva = this.cen.profundidad + cen.profundidad;
+		if(nueva >= izq.profundidad && nueva >= der.profundidad) profundidad = nueva;
 	}
 	
 	public void setProfundidad(int prof) {
@@ -109,5 +119,18 @@ public class arbol {
 	
 	public void setNumElem(int n) {
 		numNodos = n;
+	}
+	
+	
+	public String representa() {
+		String ret = "";
+		if(esHoja()) ret += elemento.toString();
+		else {
+			if(der != null) ret += der.representa();
+			if(cen != null) ret += cen.representa();
+			if(izq != null) ret += izq.representa();
+		}
+		
+		return ret;
 	}
 }
