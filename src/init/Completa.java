@@ -1,14 +1,34 @@
 package init;
 
 import java.util.Random;
-
-import model.T;
-import model.arbol;
-import model.element;
+import model.*;
 
 public class Completa extends initMethod{
-	
+
 	@Override
+	public arbol crearArbol(int profundidad) {
+		arbol nodo=null;
+		//Crea un nodo función
+		if(profundidad > 0) {
+			nodo=new arbol(new funcion(useIfs()));
+			nodo.setIzq(crearArbol(profundidad-1));
+			if(nodo.getElemento().getValor() != "NOT") {
+				nodo.setDer(crearArbol(profundidad-1));
+			}
+			if(useIfs() && nodo.getElemento().getValor() == "IF") {
+				nodo.setCen(crearArbol(profundidad-1));
+			}
+			
+		}
+		//Crea un nodo terminal
+		else {
+			nodo=new arbol(new terminal());
+		}
+		return nodo;
+	}
+
+	
+	/*@Override
 	public void inicia(arbol tree, int prof_min, int prof_max, boolean useIfs) {
 	
 		Random rand = new Random();
@@ -55,6 +75,6 @@ public class Completa extends initMethod{
 		while(!useIfs && valor == 0) rand.nextInt(T.values().length); 
 		
 		return T.values()[valor];
-	}
+	}*/
 
 }

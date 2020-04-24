@@ -1,13 +1,14 @@
 package init;
 
+import model.algoritmo;
 import model.arbol;
 
 public class RampedHalf extends initMethod{
 
 	@Override
-	public void inicia(arbol tree, int prof_min, int prof_max, boolean admiteIfs) {
+	public arbol crearArbol(int profundidad) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

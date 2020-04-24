@@ -23,7 +23,6 @@ import seleccion.*;
 
 public class manager {
 
-	private int [] mejores= {50, 224416, 388214, 1818146};
 	private int valorMejor;
 	private int mejorPos;
 	private List<observer> observers;
@@ -43,11 +42,9 @@ public class manager {
 	private double probCruc;
 	private double probMut;	
 	private int generation;
-	private algoritmo copiaFuncion;
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
-	
 	private boolean useIfs;
 	private int profundidad;
 
@@ -75,6 +72,7 @@ public class manager {
 	}
 
 	public void iniciarPoblacion() {
+		algInit.setUseIfs(useIfs);
 		poblacion=new poblacion(tamPob, funcion, algInit);
 		poblacion.iniciarPoblacion();
 		best=new double[2][maxIter];
@@ -230,19 +228,11 @@ public class manager {
 		iniciarDatos();
 	}
 	
-
-	
-	private void restore() {
-		funcion=new algoritmo(copiaFuncion);
-	}
 	public void setObservers(List<observer> obs) {
 		observers=new ArrayList<observer>();
 		for(int i=0; i < obs.size(); i++) {
 			observers.add(obs.get(i));
 		}
-	}
-	private void save() {
-		copiaFuncion=new algoritmo(this.funcion);
 	}
 	public void useIfs(boolean b) {
 		useIfs = b;

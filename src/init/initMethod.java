@@ -1,7 +1,19 @@
 package init;
-
 import model.arbol;
 
 public abstract class initMethod {
-	 public abstract void inicia(arbol tree, int prof_min, int prof_max, boolean useIfs);
+	private int maxProfundidad=3;
+	private boolean useIfs;
+	
+	public abstract arbol crearArbol(int profundidad);
+	public arbol crearArbol() {
+		return crearArbol(maxProfundidad-1);
+	}
+	public void setUseIfs(boolean useIfs) {
+		this.useIfs=useIfs;
+	}
+	
+	public boolean useIfs() {
+		return useIfs;
+	}
 }

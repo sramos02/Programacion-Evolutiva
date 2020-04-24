@@ -12,17 +12,20 @@ public class arbol {
 	int profundidad;
 	
 	public arbol() {}
+	
 	public arbol(element elemento) {
 		this.elemento=elemento;
 		numNodos = 1;
 		profundidad = 1;
 	}
+	
 	public arbol(element elemento, arbol izq) {
 		this.elemento=elemento;
 		this.izq=izq;
 		numNodos = izq.numNodos++;
 		profundidad = izq.profundidad++;
 	}
+	
 	public arbol(element elemento, arbol izq, arbol der) {
 		this.elemento=elemento;
 		this.izq=izq;
@@ -32,6 +35,7 @@ public class arbol {
 		else profundidad = der.profundidad++;
 		
 	}
+	
 	public arbol(element elemento, arbol izq, arbol der, arbol cen) {
 		this.elemento=elemento;
 		this.izq=izq;
@@ -44,6 +48,7 @@ public class arbol {
 		if(cen.profundidad > prof)prof = cen.profundidad++;
 		profundidad = prof;
 	}
+	
 	public arbol(arbol old) {
 		elemento=old.getElemento();
 		izq=old.getIzq();
@@ -53,30 +58,8 @@ public class arbol {
 		numNodos = old.numNodos;
 	}
 	
-	/**Devuelve un nodo aleatorio del arbol del tipo indicado.
-	 * Valores del tipo:
-	 * 						-Nodo -> cualquier nodo del arbol.
-	 * 						-Funcion -> nodo funci�n.
-	 * 						-Terminal -> nodo terminal.*/
-	arbol getNodoAleatorio(String tipo) {
-		arbol nodo=null;
-		int size=getNumeroNodos(tipo);
-		switch(tipo) {
-		case "Nodo":
-			break;
-		case "Funcion":
-			break;
-		case "Terminal":
-			break;
-		}
-		return nodo;
-	}
-	
-	/**Devuelve el n�mero de nodos que hay del tipo indicado*/
-	private int getNumeroNodos(String tipo) {
-		int size=0;
-		
-		return size;
+	private int getNumeroNodos() {
+		return numNodos;
 	}
 	public arbol getCen() {
 		return cen;
@@ -107,42 +90,62 @@ public class arbol {
 	}
 	
 	public boolean esHoja() {
-		return izq.empty() && der.empty() && cen.empty();
+		return izq==null && der==null && cen==null;
 	}
 	
 	public void setIzq(arbol izq) {
 		this.izq=izq;
-		numNodos++;
-		int nueva = this.izq.profundidad + izq.profundidad;
-		if(nueva >= cen.profundidad && nueva >= der.profundidad) profundidad = nueva;
+		numNodos+=izq.getNumeroNodos();
+		int nueva = profundidad + izq.profundidad;
+		int profundidad1=cen!=null?cen.getProfundidad():0;
+		int profundidad2=der!=null?der.getProfundidad():0;
+		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
 	public void setDer(arbol der) {
 		this.der=der;
 		numNodos++;
 		int nueva = this.der.profundidad + der.profundidad;
-		if(nueva >= cen.profundidad && nueva >= izq.profundidad) profundidad = nueva;
+		int profundidad1=cen!=null?cen.getProfundidad():0;
+		int profundidad2=izq!=null?izq.getProfundidad():0;
+		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
 	public void setCen(arbol cen) {
 		this.cen=cen;
 		numNodos++;
 		int nueva = this.cen.profundidad + cen.profundidad;
-		if(nueva >= izq.profundidad && nueva >= der.profundidad) profundidad = nueva;
+		int profundidad1=der!=null?der.getProfundidad():0;
+		int profundidad2=izq!=null?izq.getProfundidad():0;
+		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
+	}
+	
+	public int getMaxProfundidad(int valor1, int valor2, int valor3) {
+		int maxProfundidad=valor1;
+		if(valor2 > maxProfundidad && valor2 > valor3) {
+			return valor2;
+		}
+		return valor3 > maxProfundidad ? valor3 : maxProfundidad;
 	}
 	
 	public void setProfundidad(int prof) {
 		profundidad = prof;
 	}
+	
 	public void setNumElem(int n) {
 		numNodos = n;
 	}
+	
 	public void representa(List<element> ret) {
-		if(esHoja()) ret.add(elemento);
-		else {
-			if(der != null) der.representa(ret);
-			if(izq != null) izq.representa(ret);
-			if(cen != null) cen.representa(ret);
-		}
+		ret.add(elemento);
+		if(izq != null) {
+			izq.representa(ret);
+		} 
+		if(der != null) {
+			der.representa(ret);
+		} 
+		if(cen != null) {
+			cen.representa(ret);
+		} 
 	}
 }
