@@ -3,7 +3,8 @@ package poblacion;
 import java.util.ArrayList;
 import java.util.List;
 
-import genetica.gen;
+import genetica.genes;
+import init.initMethod;
 import model.algoritmo;
 
 public class poblacion {
@@ -12,11 +13,15 @@ public class poblacion {
 	private int tam;
 	private algoritmo fun;
 	private double best;
+	private initMethod algInit;
+	private int numVars;
 	
-	public poblacion(int tam, algoritmo f) {
+	public poblacion(int tam, algoritmo f, initMethod algInit, int numVars) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
 		fun=f;
+		this.numVars=numVars;
+		this.algInit=algInit;
 	}
 	
 	public poblacion(poblacion old, boolean copiarPob) {
@@ -29,6 +34,11 @@ public class poblacion {
 		}
 		tam=old.getSize();
 		fun=old.getFuncion();
+		numVars=old.getNumVars();
+	}
+
+	private int getNumVars() {
+		return numVars;
 	}
 
 	private void copiarPoblacion(poblacion old) {
@@ -41,7 +51,7 @@ public class poblacion {
 	public void iniciarPoblacion() {
 		
 		for(int i=0; i < tam; i++) {
-			individuo cromosoma=new individuo(fun);
+			individuo cromosoma=new individuo(fun, algInit, numVars);
 			poblacion.add(cromosoma);
 		}
 		iniBest();
@@ -111,7 +121,7 @@ public class poblacion {
 		
 	}
 
-	public boolean contains(gen elem) {
+	public boolean contains(genes elem) {
 		for(int i = 0; i < poblacion.size(); i++) {
 			if(poblacion.get(i).getCromosoma() == elem) return true;
 		}

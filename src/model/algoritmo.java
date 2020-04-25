@@ -7,81 +7,59 @@ import poblacion.poblacion;
 
 public class algoritmo {
 	
-	private adaptarMin adaptador;
-	private int [][] flujos;
-	private int [][] distancias;
-	private int tam;
+	private adaptacion adaptador;
+	private int numVariables;
+	private int numSelectores;
 	
 	public algoritmo() {
-		adaptador=new adaptarMin();
+		adaptador=new adaptarMax();
 	}
 
 	public algoritmo(algoritmo viejo) {
-		adaptador=new adaptarMin(viejo.getAdaptador());
-		tam=viejo.getSize();
-		distancias=copiarArray(viejo.getDistancias(), tam);
-		flujos=copiarArray(viejo.getFlujos(), tam);
+		adaptador=new adaptarMax(viejo.getAdaptador());
 	}
+	
 	private adaptacion getAdaptador() {
 		return adaptador;
 	}
-
-	private int[][] getFlujos() {
-		return flujos;
-	}
-
-	private int [][] getDistancias() {
-		return distancias;
-	}
-
-	public int getSize() {
-		return tam;
-	}
-
-	private int[][] copiarArray(int[][] viejo, int tam) {
-		int[][] nuevo=new int[tam][tam];
-		for(int i=0; i < tam; i++) {
-			for(int j=0; j < tam; j++) {
-				nuevo[i][j]=viejo[i][j];
-			}
-		}
-		return nuevo;
-	}
-	public void cargarDatos(int [][] dist, int [][] fluj, int tam) {
-		distancias=dist;
-		flujos=fluj;
-		this.tam=tam;
+	
+	public void setNumVariables(int num) {
+		numVariables=num;
+		numSelectores = num == 6 ? 2:3; 
 	}
 	
-	public int calcularFuncion(List<Integer> fenotipos) {
+	public int calcularFuncion(List<element> fenotipos) {
 		int resultado=0;
-		if(distancias!=null && flujos != null) {
-			for(int i=0; i < tam; i++) {
-				for(int j=0; j < tam; j++) {
-					resultado+=distancias[i][j]*flujos[fenotipos.get(i)][fenotipos.get(j)];
-				}
-			}
-		}
-		else
-		{
-			System.err.println("No se han cargado los datos, no se puede calcular el resultado.");
-		}
+		int k=0;
+		int sol []=new int [numVariables];
+		resultado=generar(k, sol, fenotipos);
 		return resultado;
 	}
 	
-	public boolean best(double fitness, double fitness2) {
-		if(adaptador.getAdaptado()) {
-			return fitness > fitness2;
+	private int generar(int k, int[] sol, List<element> fenotipos) {
+		int numSoluciones=0;
+		for (int i = 0; i < 2; i++) {
+			sol[k]=i;
+			if(k == numVariables-1) {
+				int resultadoExpresion=fenotipos.get(0).evaluarExpresion(new contador(), sol, fenotipos);
+				int resultadoMux = obtenerSalida(sol);
+				numSoluciones += resultadoExpresion == resultadoMux ? 1 : 0; 
+			}
+			else {
+				numSoluciones += generar(k+1, sol, fenotipos);
+			}
 		}
-		else {
-			return fitness < fitness2;
-		}
+		return numSoluciones;
 	}
 
-	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
-		for(int i=0; i < tamElite; i++) {
-			objetivo.add(new individuo(fuente.get(i)));
+	private int obtenerSalida(int[] sol) {
+		int seleccion=0;
+		for (int i = numSelectores-1; i >= 0; i--) {
+			if(sol[i]==1) {
+				seleccion += Math.pow(2, numSelectores-i-1);
+			}
 		}
+		return sol[seleccion + numSelectores];
 	}
 
 	public void desadaptar(poblacion poblacion) {
@@ -91,13 +69,28 @@ public class algoritmo {
 	public void adaptar(poblacion poblacion) {
 		adaptador.adaptar(poblacion);
 	}
-
-	public boolean worst(double fitness, double fitness2) {
+	
+	public boolean best(double fitness, double fitness2) {
 		if(adaptador.getAdaptado()) {
 			return fitness < fitness2;
 		}
 		else {
 			return fitness > fitness2;
+		}
+	}
+
+	public boolean worst(double fitness, double fitness2) {
+		if(adaptador.getAdaptado()) {
+			return fitness > fitness2;
+		}
+		else {
+			return fitness < fitness2;
+		}
+	}
+	
+	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
+		for(int i=0; i < tamElite; i++) {
+			objetivo.add(new individuo(fuente.get(i)));
 		}
 	}
 
