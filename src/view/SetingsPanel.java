@@ -36,9 +36,9 @@ public class SetingsPanel extends JPanel implements observer{
 	private controller ctrl;
 	
 	private String [] prof = {"6", "11"};
-	private String [] listaInit = {"Completa", "Ramped&Half", "Creciente"};
-	private String [] listaMut= {"SubArbol", "Contraccion", "Expansion", "Permutacion", "Terminal"};
-	private String [] listaCruz= {"Intercambio"};
+	private String [] listaInit = {"Complete", "Ramped&Half", "Increasing"};
+	private String [] listaMut= {"SubTree", "Contraction", "Expansion", "Permutation", "Terminal"};
+	private String [] listaCruz= {"Exchange"};
 	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
 	
 	private JComboBox<String> profundidad;
@@ -153,7 +153,7 @@ public class SetingsPanel extends JPanel implements observer{
 
 		 init1 = new JPanel();
 		 BoxLayout box01 = new BoxLayout(init1, BoxLayout.X_AXIS);
-		 JLabel lInit = new JLabel("Init");
+		 JLabel lInit = new JLabel("Type");
 		 setDimLabel(lInit, dim2);
 		 init1.add(lInit);
 		 changeInit(listaInit);
@@ -161,7 +161,7 @@ public class SetingsPanel extends JPanel implements observer{
 
 		 
 		 init2 = new JPanel();
-		 JLabel lInit2 = new JLabel("Profundidad");
+		 JLabel lInit2 = new JLabel("Ways");
 		 setDimLabel(lInit2, dim2);
 		 init2.add(lInit2);		 
 		 changeProf(prof);
@@ -486,7 +486,7 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 	private void seleccionarCruce(String cruce) {
 		switch(cruce) {
-		case "Intercambio":
+		case "Exchange":
 			ctrl.setCrossFunct(0);
 			break;
 		default:
@@ -524,16 +524,16 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionarMutacion(String mutacion) {
 		switch(mutacion){
-		case "SubArbol":
+		case "SubTree":
 			ctrl.setMutationFunct(0);
 			break;
-		case "Contraccion":
+		case "Contraction":
 			ctrl.setMutationFunct(1);
 			break;
 		case "Expansion":
 			ctrl.setMutationFunct(2);
 			break;
-		case "Permutacion":
+		case "Permutation":
 			ctrl.setMutationFunct(3);
 			break;
 		case "Terminal":
@@ -546,13 +546,13 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private void seleccionarInit(String in) {
 		switch(in){
-		case "Completa":
+		case "Complete":
 			ctrl.setInitFunct(0);
 			break;
 		case "Ramped&Half":
 			ctrl.setInitFunct(1);
 			break;
-		case "Creciente":
+		case "Increasing":
 			ctrl.setInitFunct(2);
 			break;
 		default:

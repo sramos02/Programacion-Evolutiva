@@ -95,7 +95,6 @@ public class poblacion {
 		return fun;
 	}
 	public void iniBest() {
-		
 		best=poblacion.get(0).getFitness();
 	}
 	public void addIndividuo(individuo i) {

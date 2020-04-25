@@ -5,18 +5,19 @@ import java.util.Random;
 
 public class funcion extends element{
 	private String [] posiblesValores= {"AND", "OR", "NOT", "IF"};
-	private int size=4;
+	private int size;
 	
 	public funcion(boolean useIfs) {
+		if(useIfs)size = 3;
+		else size = 4;
 		setTipo("funcion");
-		generarFuncion(useIfs);
+		generarFuncion();
 	}
 	
 	/**Elige uno de los posibles valores(AND, OR, NOT o If) y lo devuelve*/
-	public void generarFuncion(boolean useIfs) {
-		int realSize=useIfs?4:3;
+	public void generarFuncion() {
 		Random r=new Random();
-		int pos=Math.abs(r.nextInt()%realSize);
+		int pos=Math.abs(r.nextInt()%size);
 		setValor(posiblesValores[pos]);
 	}
 
@@ -41,31 +42,27 @@ public class funcion extends element{
 
 	@Override
 	protected int evaluarExpresion(contador contador, int[] sol, List<element> fenotipo) {
-		int solucion=0;
-		int a, b;
+		int op1, op2;
+		
 		contador.addCount();
 		switch(getValor()) {
 		case "NOT":
-			solucion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo)==1? 0 : 1;
-			break;
+			return fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo)==1? 0 : 1;
 		case "AND":
-			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			solucion=a & b;
-			break;
+			op1=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			op2=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			return op1 & op2;
 		case "OR":
-			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			solucion=a | b;
-			break;
+			op1=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			op2=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			return op1 | op2;
 		case "IF":
-			int condicion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
-			solucion = condicion == 1 ? a:b ;
-			break;
+			int condicion = fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			op1=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			op2=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			return condicion == 1 ? op1:op2 ;
 		}
-		return solucion;
+		return 0; //Aqui solo llega en caso de error
 	}
 	
 }

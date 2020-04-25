@@ -11,9 +11,9 @@ public abstract class adaptacion {
 		limit=viejo.getLimit();
 		adaptado=viejo.getAdaptado();
 	}
-	public adaptacion() {
-		// TODO Auto-generated constructor stub
-	}
+	
+	public adaptacion() {}
+	
 	public void setLimit(double l) {
 		limit=l;
 	}
