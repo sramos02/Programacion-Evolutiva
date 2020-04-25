@@ -10,9 +10,9 @@ public class individuo {
 	private int fitness;
 	private algoritmo f;
 	
-	public individuo(algoritmo f, initMethod algInit) {
+	public individuo(algoritmo f, initMethod algInit, int numVars) {
 		this.f = f;
-		cromosoma = new genes(algInit);
+		cromosoma = new genes(algInit, numVars);
 		calcularFitness(); 
 	}
 	

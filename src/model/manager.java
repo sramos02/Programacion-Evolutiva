@@ -73,7 +73,7 @@ public class manager {
 	public void iniciarPoblacion() {
 		algInit.setUseIfs(useIfs);
 		funcion.setNumVariables(numVariables);
-		poblacion=new poblacion(tamPob, funcion, algInit);
+		poblacion=new poblacion(tamPob, funcion, algInit, numVariables);
 		poblacion.iniciarPoblacion();
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
