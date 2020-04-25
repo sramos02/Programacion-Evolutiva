@@ -23,7 +23,6 @@ import seleccion.*;
 
 public class manager {
 
-	private int [] mejores= {50, 224416, 388214, 1818146};
 	private int valorMejor;
 	private int mejorPos;
 	private List<observer> observers;
@@ -32,28 +31,24 @@ public class manager {
 	private algoritmoCruce algCruce;		
 	private mutacion algMut;
 	private initMethod algInit;
-	
 	private poblacion poblacion;
 	private double bestGen [][];
 	private double average [][];
 	private double best [][];
-	private List<Integer> bestVars;
+	private String bestExpresion;
 	private algoritmo funcion;
 	private double probElite;
 	private double probCruc;
 	private double probMut;	
 	private int generation;
-	private algoritmo copiaFuncion;
 	private elite elite;
 	private int maxIter;
 	private int tamPob;
-	
 	private boolean useIfs;
-	private int profundidad;
+	private int numVariables;
 
 	public manager() {
 		observers=new ArrayList<observer>();
-		bestVars=new ArrayList<Integer>();
 		funcion=new algoritmo();
 		elite=new elite();
 		iniciarDatos();
@@ -66,6 +61,7 @@ public class manager {
 		probMut=0.02;
 		maxIter=100;
 		tamPob=100;
+		numVariables=6;
 		useIfs = false;
 	}
 	public void addObserver(observer o) {
@@ -75,6 +71,8 @@ public class manager {
 	}
 
 	public void iniciarPoblacion() {
+		algInit.setUseIfs(useIfs);
+		funcion.setNumVariables(numVariables);
 		poblacion=new poblacion(tamPob, funcion, algInit);
 		poblacion.iniciarPoblacion();
 		best=new double[2][maxIter];
@@ -100,7 +98,7 @@ public class manager {
 		}
 		
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onFinished( best, bestGen, average, bestVars, valorMejor, mejorPos);
+			observers.get(i).onFinished( best, bestGen, average, bestExpresion, valorMejor, mejorPos);
 		}
 	}
 	private void desadaptar() {
@@ -131,12 +129,8 @@ public class manager {
 		if(generation==0 || funcion.best(bestGen[1][generation], best[1][generation-1])) {
 			best[1][generation]=bestGen[1][generation];
 			mejorPos=generation;
-			bestVars.clear();
-			bestVars.add((int) best[1][generation]);
 			individuo mejor=poblacion.getMejorInd();
-			for(int i=0; i < mejor.getSizeCromosoma(); i++) {
-				//bestVars.add(mejor.getCromosomaAt(i).getFenotipo());
-			}
+			bestExpresion=mejor.getExpresion();
 		}
 		else
 		{
@@ -230,25 +224,17 @@ public class manager {
 		iniciarDatos();
 	}
 	
-
-	
-	private void restore() {
-		funcion=new algoritmo(copiaFuncion);
-	}
 	public void setObservers(List<observer> obs) {
 		observers=new ArrayList<observer>();
 		for(int i=0; i < obs.size(); i++) {
 			observers.add(obs.get(i));
 		}
 	}
-	private void save() {
-		copiaFuncion=new algoritmo(this.funcion);
-	}
 	public void useIfs(boolean b) {
 		useIfs = b;
 	}
-	public void setProf(Integer i) {
-		profundidad = i;
+	public void setNumVars(int v) {
+		numVariables=v;
 	}
 }
 
