@@ -8,7 +8,8 @@ import poblacion.poblacion;
 public class algoritmo {
 	
 	private adaptacion adaptador;
-	private int tam;
+	private int numVariables;
+	private int numSelectores;
 	
 	public algoritmo() {
 		adaptador=new adaptarMax();
@@ -22,12 +23,45 @@ public class algoritmo {
 		return adaptador;
 	}
 	
+	public void setNumVariables(int num) {
+		numVariables=num;
+		numSelectores = num == 6 ? 2:3; 
+	}
+	
 	public int calcularFuncion(List<element> fenotipos) {
 		int resultado=0;
-		
+		int k=0;
+		int sol []=new int [numVariables];
+		resultado=generar(k, sol, fenotipos);
 		return resultado;
 	}
 	
+	private int generar(int k, int[] sol, List<element> fenotipos) {
+		int numSoluciones=0;
+		for (int i = 0; i < 2; i++) {
+			sol[k]=i;
+			if(k == numVariables-1) {
+				int resultadoExpresion=fenotipos.get(0).evaluarExpresion(new contador(), sol, fenotipos);
+				int resultadoMux = obtenerSalida(sol);
+				numSoluciones += resultadoExpresion == resultadoMux ? 1 : 0; 
+			}
+			else {
+				numSoluciones += generar(k+1, sol, fenotipos);
+			}
+		}
+		return numSoluciones;
+	}
+
+	private int obtenerSalida(int[] sol) {
+		int seleccion=0;
+		for (int i = numSelectores-1; i >= 0; i--) {
+			if(sol[i]==1) {
+				seleccion += Math.pow(2, numSelectores-i-1);
+			}
+		}
+		return sol[seleccion + numSelectores];
+	}
+
 	public void desadaptar(poblacion poblacion) {
 		adaptador.deshacer(poblacion);
 	}

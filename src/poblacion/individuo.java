@@ -1,9 +1,5 @@
 package poblacion;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import genetica.genes;
 import init.initMethod;
 import model.algoritmo;
@@ -31,7 +27,7 @@ public class individuo {
 	}
 	
 	public void calcularFitness() {
-		this.fitness=f.calcularFuncion(cromosoma.getFenotipoLista());
+		this.fitness=f.calcularFuncion(cromosoma.getFenotipoList());
 	}
 	
 	public genes getCromosoma(){
@@ -52,6 +48,10 @@ public class individuo {
 
 	public void setFitness(int d) {
 		fitness=d;
+	}
+
+	public String getExpresion() {
+		return cromosoma.getFenotipo();
 	}
 	
 }

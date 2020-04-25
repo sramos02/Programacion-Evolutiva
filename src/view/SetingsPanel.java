@@ -35,7 +35,7 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private controller ctrl;
 	
-	private String [] prof = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"};
+	private String [] prof = {"6", "11"};
 	private String [] listaInit = {"Completa", "Ramped&Half", "Creciente"};
 	private String [] listaMut= {"SubArbol", "Contraccion", "Expansion", "Permutacion", "Terminal"};
 	private String [] listaCruz= {"Intercambio"};
@@ -400,10 +400,10 @@ public class SetingsPanel extends JPanel implements observer{
 			init2.remove(selectMut);
 		profundidad = new JComboBox<String>(prof2);
 		profundidad.setEditable(false);
-		prof(prof2[0]);
+		setNumVars(prof2[0]);
 		profundidad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				prof((String)profundidad.getSelectedItem());
+				setNumVars((String)profundidad.getSelectedItem());
 			}
 		 });
 		setDimCombobox(profundidad, dim2);
@@ -414,8 +414,8 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 
 	
-	private void prof(String i) {
-		ctrl.prof(Integer.parseInt(i));
+	private void setNumVars(String i) {
+		ctrl.setNumVars(Integer.parseInt(i));
 	}
 
 
@@ -596,13 +596,15 @@ public class SetingsPanel extends JPanel implements observer{
 	}
 
 	@Override
-	public void onFinished(double[][] best, double[][] bestGen, double[][] average, List<Integer> bestVars, int mejor, int pos) {
+	public void onNextGeneration() {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public void onNextGeneration() {
+	public void onFinished(double[][] best, double[][] bestGen, double[][] average, String bestResult,
+			int mejorEsperado, int mejorPos) {
 		// TODO Auto-generated method stub
 		
 	}

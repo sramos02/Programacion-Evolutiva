@@ -38,6 +38,34 @@ public class funcion extends element{
 		
 		return cadena;
 	}
-	
+
+	@Override
+	protected int evaluarExpresion(contador contador, int[] sol, List<element> fenotipo) {
+		int solucion=0;
+		int a, b;
+		contador.addCount();
+		switch(getValor()) {
+		case "NOT":
+			solucion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo)==1? 0 : 1;
+			break;
+		case "AND":
+			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			solucion=a & b;
+			break;
+		case "OR":
+			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			solucion=a | b;
+			break;
+		case "IF":
+			int condicion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
+			solucion = condicion == 1 ? a:b ;
+			break;
+		}
+		return solucion;
+	}
 	
 }
