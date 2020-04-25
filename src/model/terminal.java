@@ -5,10 +5,13 @@ import java.util.Random;
 
 public class terminal extends element{
 	private String [] posiblesValores= {"A0", "A1", "D0", "D1", "D2", "D3"};
-	private int size=6;
+	private String [] posiblesValores2= {"A0", "A1","A2", "D0", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"};
+	private int size;
 	private tupla valor;
-	public terminal() {
+	
+	public terminal(int numVars) {
 		setTipo("terminal");
+		size=numVars;
 		generarTerminal();
 	}
 	
@@ -17,7 +20,8 @@ public class terminal extends element{
 	public void generarTerminal() {
 		Random r=new Random();
 		int pos=Math.abs(r.nextInt()%size);
-		valor=new tupla(pos, posiblesValores[pos]);
+		String nombre = size == 6 ?  posiblesValores[pos] : posiblesValores2[pos];
+		valor=new tupla(pos, nombre);
 		setValor(valor.getValor());
 	}
 

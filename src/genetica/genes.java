@@ -13,9 +13,9 @@ public class genes {
 	private List<element> fenotipo;
 	private initMethod algInit;
 	
-	public genes(initMethod algInit) {
+	public genes(initMethod algInit, int numVars) {
 		this.algInit=algInit;
-		inicializarArbol();
+		inicializarArbol(numVars);
 		fenotipo=new ArrayList<element>();
 		genotipo.representa(fenotipo);
 	}
@@ -26,8 +26,8 @@ public class genes {
 		algInit=gen.getAlgInit();
 	}
 	
-	private void inicializarArbol() {
-		genotipo=algInit.crearArbol();
+	private void inicializarArbol(int numVars) {
+		genotipo=algInit.crearArbol(numVars);
 	}
 	
 	/**Convierte el la lista de elementos en un fenotipo tipo String*/
