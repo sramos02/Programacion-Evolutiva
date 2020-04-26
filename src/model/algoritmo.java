@@ -101,24 +101,3 @@ public class algoritmo {
 	}
 	
 }
-
-
-
-
-
-
-/*
-//Calcula el fitness de un individuo
-public int calcularFuncion(List<element> fenotipo) {
-	int numSoluciones = 0;
-	
-	//Recorre las combinaciones posibles de selectores (000, 010, 110..)
-	for(int i = 0; i < Math.pow(2, numSelectores); i++) {
-		int selector[] = new int [numSelectores];
-		
-		//Comprueba para la entrada actual el valor que tiene en la tabla 
-	}
-	
-	return numSoluciones;
-}
-*/
