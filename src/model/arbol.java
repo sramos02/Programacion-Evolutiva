@@ -7,7 +7,6 @@ public class arbol {
 	private arbol izq=null;
 	private arbol der=null; 
 	private arbol cen=null;
-	private algoritmo algoritmo;
 	int numNodos;
 	int profundidad;
 	
@@ -96,7 +95,7 @@ public class arbol {
 	public void setIzq(arbol izq) {
 		this.izq=izq;
 		numNodos+=izq.getNumeroNodos();
-		int nueva = profundidad + izq.profundidad;
+		int nueva = izq.profundidad+1;
 		int profundidad1=cen!=null?cen.getProfundidad():0;
 		int profundidad2=der!=null?der.getProfundidad():0;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
@@ -104,8 +103,8 @@ public class arbol {
 	
 	public void setDer(arbol der) {
 		this.der=der;
-		numNodos++;
-		int nueva = this.der.profundidad + der.profundidad;
+		numNodos+=der.getNumeroNodos();
+		int nueva = der.profundidad+1;
 		int profundidad1=cen!=null?cen.getProfundidad():0;
 		int profundidad2=izq!=null?izq.getProfundidad():0;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
@@ -113,8 +112,8 @@ public class arbol {
 	
 	public void setCen(arbol cen) {
 		this.cen=cen;
-		numNodos++;
-		int nueva = this.cen.profundidad + cen.profundidad;
+		numNodos+=cen.getNumeroNodos();
+		int nueva = cen.profundidad+1;
 		int profundidad1=der!=null?der.getProfundidad():0;
 		int profundidad2=izq!=null?izq.getProfundidad():0;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
