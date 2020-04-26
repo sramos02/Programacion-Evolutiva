@@ -19,21 +19,21 @@ public class algoritmo {
 		adaptador=new adaptarMax(viejo.getAdaptador());
 	}
 	
-	
-	
 	public void setNumVariables(int num) {
-		numVariables=num;
-		numSelectores = num == 6 ? 2:3; //Esto no es general, se haría con potencias de 2 
+		numSelectores = (num == 6)?2:3; //Esto no es general, se haría con potencias de 2
+		numVariables = num - numSelectores;
 	}
 	
-	/**Calcula el fitness de cada individuo y devuelve el numero de soluciones validas*/
+	
+	
 	public int calcularFuncion(List<element> fenotipos) {
-		int k = 0;
-		int sol [] = new int [numVariables];
-		return generar(k, sol, fenotipos);
+		int resultado=0;
+		int k=0;
+		int sol []=new int [numVariables];
+		resultado=generar(k, sol, fenotipos);
+		return resultado;
 	}
 	
-	/**Genera y devuelve el numero de soluciones validas*/
 	private int generar(int k, int[] sol, List<element> fenotipos) {
 		int numSoluciones=0;
 		for (int i = 0; i < 2; i++) {
@@ -59,14 +59,7 @@ public class algoritmo {
 		}
 		return sol[seleccion + numSelectores];
 	}
-
-	public void desadaptar(poblacion poblacion) {
-		adaptador.deshacer(poblacion);
-	}
-
-	public void adaptar(poblacion poblacion) {
-		adaptador.adaptar(poblacion);
-	}
+	
 	
 	/**Elige el mejor fitness de entre dos dados*/
 	public boolean best(double fitness, double fitness2) {
@@ -77,17 +70,55 @@ public class algoritmo {
 			return fitness > fitness2;
 		}
 	}
-
+	
+	/**Elige el peor fitness de entre dos dados*/
+	public boolean worst(double fitness, double fitness2) {
+		if(adaptador.getAdaptado()) {
+			return fitness > fitness2;
+		}
+		else {
+			return fitness < fitness2;
+		}
+	}
 	
 	/**Genera la lista de los individuos a los que se aplicará elite*/
 	public void addElite(List<individuo> out, List<individuo> in, double tamElite) {
 		for(int i=0; i < tamElite; i++)
 			out.add(new individuo(in.get(i)));
 	}
-
 	
 	private adaptacion getAdaptador() {
 		return adaptador;
 	}
 	
+
+	public void desadaptar(poblacion poblacion) {
+		adaptador.deshacer(poblacion);
+	}
+
+	public void adaptar(poblacion poblacion) {
+		adaptador.adaptar(poblacion);
+	}
+	
 }
+
+
+
+
+
+
+/*
+//Calcula el fitness de un individuo
+public int calcularFuncion(List<element> fenotipo) {
+	int numSoluciones = 0;
+	
+	//Recorre las combinaciones posibles de selectores (000, 010, 110..)
+	for(int i = 0; i < Math.pow(2, numSelectores); i++) {
+		int selector[] = new int [numSelectores];
+		
+		//Comprueba para la entrada actual el valor que tiene en la tabla 
+	}
+	
+	return numSoluciones;
+}
+*/

@@ -27,7 +27,9 @@ public class individuo {
 	}
 	
 	public void calcularFitness() {
-		this.fitness=f.calcularFuncion(cromosoma.getFenotipoList());
+		int lg = cromosoma.getFenotipoList().size() - 1; //Temporal HASTA QUE SE ARREGLE LA INICIALIZACIÓN
+		f.setNumVariables(lg);
+		this.fitness = f.calcularFuncion(cromosoma.getFenotipoList());
 	}
 	
 	public genes getCromosoma(){
