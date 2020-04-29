@@ -99,5 +99,9 @@ public class algoritmo {
 	public void adaptar(poblacion poblacion) {
 		adaptador.adaptar(poblacion);
 	}
+
+	public int getNumVariables() {
+		return numVariables;
+	}
 	
 }

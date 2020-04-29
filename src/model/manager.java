@@ -15,7 +15,7 @@ import mutacion.Contraccion;
 import mutacion.Expansion;
 import mutacion.Permutacion;
 import mutacion.SubArbol;
-import mutacion.Terminal;
+import mutacion.mutTerminal;
 import mutacion.mutacion;
 import poblacion.individuo;
 import poblacion.poblacion;
@@ -200,7 +200,7 @@ public class manager {
 			break;
 		case 3: algMut=new Permutacion();
 			break;
-		case 4: algMut = new Terminal();
+		case 4: algMut = new mutTerminal();
 			break;
 		}
 	}

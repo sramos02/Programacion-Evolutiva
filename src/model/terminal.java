@@ -23,6 +23,13 @@ public class terminal extends element{
 		valor = new tupla(pos, nombre);
 		setValor(valor.getValor());
 	}
+	
+	/**Devuelve un nuevo terminal segun la longitud*/
+	public String nuevoTerminal(int tam) {
+		Random r=new Random();
+		int pos = Math.abs(r.nextInt()%size);
+		return (size == 6)? valores6[pos] : valores11[pos];
+	}
 
 	@Override
 	public String toString(contador i, List<element> fenotipo) {
