@@ -3,7 +3,7 @@ package model;
 import poblacion.poblacion;
 
 public abstract class adaptacion {
-	private final double c = 1.05;
+	private final double c=1.05;
 	private double limit;
 	private boolean adaptado;
 	
@@ -11,11 +11,11 @@ public abstract class adaptacion {
 		limit=viejo.getLimit();
 		adaptado=viejo.getAdaptado();
 	}
-	
-	public adaptacion() {}
-	
+	public adaptacion() {
+		// TODO Auto-generated constructor stub
+	}
 	public void setLimit(double l) {
-		limit = l;
+		limit=l;
 	}
 	public double getLimit() {
 		return limit;

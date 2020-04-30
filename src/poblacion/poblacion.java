@@ -15,10 +15,8 @@ public class poblacion {
 	private double best;
 	private initMethod algInit;
 	private int numVars;
-	private boolean useIfs;
 	
-	public poblacion(int tam, algoritmo f, initMethod algInit, int numVars, boolean useIfs) {
-		this.useIfs = useIfs;
+	public poblacion(int tam, algoritmo f, initMethod algInit, int numVars) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
 		fun=f;
@@ -34,7 +32,6 @@ public class poblacion {
 		else {
 			poblacion=new ArrayList<individuo>();
 		}
-		useIfs = old.useIfs;
 		tam=old.getSize();
 		fun=old.getFuncion();
 		numVars=old.getNumVars();
@@ -98,6 +95,7 @@ public class poblacion {
 		return fun;
 	}
 	public void iniBest() {
+		
 		best=poblacion.get(0).getFitness();
 	}
 	public void addIndividuo(individuo i) {
@@ -130,7 +128,4 @@ public class poblacion {
 		return false;
 	}
 
-	public boolean getUseIfs() {
-		return useIfs;
-	}
 }

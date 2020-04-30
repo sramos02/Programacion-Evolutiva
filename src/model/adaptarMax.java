@@ -14,7 +14,7 @@ public class adaptarMax extends adaptacion{
 	}
 
 	protected void establecerLimite(poblacion p) {
-		double valor = p.getIndividuo(0).getFitness();
+		double valor=p.getIndividuo(0).getFitness();
 		for(int i=1; i < p.getSize(); i++) {
 			if(p.getIndividuo(i).getFitness() < valor) {
 				valor=p.getIndividuo(i).getFitness();

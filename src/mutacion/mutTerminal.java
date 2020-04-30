@@ -20,17 +20,18 @@ public class mutTerminal extends mutacion {
 				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				List<element> aux = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				
+				//Fuerza a encontrar un terminal que mutar una vez decide que un individuo muta
 				while(aux.get(r).getTipo() == "funcion") {
 			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				}
 			
-				terminal aux2 = new terminal(poblacion.getFuncion().getNumVariables());
-				element nuevo = (element) aux2;
+				element nuevo = new terminal(poblacion.getFuncion().getNumVariables());
+				terminal aux2 =  (terminal) nuevo;
+				
 				nuevo.setTipo("terminal");
 				nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
 				
 				aux.set(r, nuevo);
-
 			}
 		}
 	}

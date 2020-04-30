@@ -24,7 +24,7 @@ public class mutFuncional extends mutacion{
 			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				}
 			
-				element nuevo = new funcion(poblacion.getUseIfs());
+				element nuevo = new funcion(false);
 				funcion aux2 = (funcion) nuevo;
 				nuevo.setTipo("funcion");
 				nuevo.setValor(aux2.nuevaFuncion());
@@ -34,4 +34,3 @@ public class mutFuncional extends mutacion{
 		}
 	}
 }
-
