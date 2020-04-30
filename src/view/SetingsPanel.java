@@ -37,7 +37,7 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private String [] prof = {"6", "11"};
 	private String [] listaInit = {"Complete", "Ramped&Half", "Increasing"};
-	private String [] listaMut= {"SubTree", "Contraction", "Expansion", "Permutation", "Terminal"};
+	private String [] listaMut= {"SubTree", "Contraction", "Expansion", "Permutation", "Terminal", "Funcional"};
 	private String [] listaCruz= {"Exchange"};
 	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
 	
@@ -538,6 +538,9 @@ public class SetingsPanel extends JPanel implements observer{
 			break;
 		case "Terminal":
 			ctrl.setMutationFunct(4);
+			break;
+		case "Funcional":
+			ctrl.setMutationFunct(5);
 			break;
 			default:
 				break;

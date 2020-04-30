@@ -64,5 +64,10 @@ public class funcion extends element{
 		}
 		return 0; //Aqui solo llega en caso de error
 	}
+
+	public String nuevaFuncion() {
+		Random r=new Random();
+		return posiblesValores[Math.abs(r.nextInt()%size)];
+	}
 	
 }

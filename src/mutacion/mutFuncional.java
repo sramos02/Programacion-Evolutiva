@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Random;
 
 import model.element;
-import model.terminal;
+import model.funcion;
 import poblacion.poblacion;
 
-public class mutTerminal extends mutacion {
+public class mutFuncional extends mutacion{
 
 	@Override
 	public void mutar(poblacion poblacion, double probMutacion) {
@@ -20,18 +20,18 @@ public class mutTerminal extends mutacion {
 				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				List<element> aux = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				
-				while(aux.get(r).getTipo() == "funcion") {
+				while(aux.get(r).getTipo() == "terminal") {
 			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				}
 			
-				terminal aux2 = new terminal(poblacion.getFuncion().getNumVariables());
-				element nuevo = (element) aux2;
-				nuevo.setTipo("terminal");
-				nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
+				element nuevo = new funcion(poblacion.getUseIfs());
+				funcion aux2 = (funcion) nuevo;
+				nuevo.setTipo("funcion");
+				nuevo.setValor(aux2.nuevaFuncion());
 				
 				aux.set(r, nuevo);
-
 			}
 		}
 	}
 }
+

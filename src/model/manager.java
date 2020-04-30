@@ -15,6 +15,7 @@ import mutacion.Contraccion;
 import mutacion.Expansion;
 import mutacion.Permutacion;
 import mutacion.SubArbol;
+import mutacion.mutFuncional;
 import mutacion.mutTerminal;
 import mutacion.mutacion;
 import poblacion.individuo;
@@ -73,7 +74,7 @@ public class manager {
 	public void iniciarPoblacion() {
 		algInit.setUseIfs(useIfs);
 		funcion.setNumVariables(numVariables);
-		poblacion=new poblacion(tamPob, funcion, algInit, numVariables);
+		poblacion=new poblacion(tamPob, funcion, algInit, numVariables, useIfs);
 		poblacion.iniciarPoblacion();
 		best=new double[2][maxIter];
 		bestGen=new double[2][maxIter];
@@ -202,6 +203,8 @@ public class manager {
 			break;
 		case 4: algMut = new mutTerminal();
 			break;
+		case 5: algMut = new mutFuncional();
+		break;
 		}
 	}
 	public void setInitFunct(int i) {
