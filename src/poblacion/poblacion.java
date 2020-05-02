@@ -131,4 +131,12 @@ public class poblacion {
 	public boolean getUseIfs() {
 		return algInit.useIfs();
 	}
+
+	public initMethod getAlgInit() {
+		return algInit;
+	}
+
+	public void setInit(initMethod alg) {
+		this.algInit = alg;	
+	}
 }
