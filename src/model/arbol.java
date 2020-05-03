@@ -147,4 +147,10 @@ public class arbol {
 			cen.representa(ret);
 		} 
 	}
+	
+
+	public void setNodoArbol(element valor, int pos) {
+		//Introduce valor en la posicion pos
+	}
+
 }

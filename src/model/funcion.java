@@ -73,5 +73,18 @@ public class funcion extends element{
 		return posiblesValores[Math.abs(r.nextInt()%size)];
 		
 	}
+
+	public int numOperandos() {
+		switch(getValor()) {
+		case "NOT":
+			return 1;
+		case "AND": 
+		case "OR":
+			return 2;
+		case "IF":
+			return 3;
+		}
+		return 0;
+	}
 	
 }

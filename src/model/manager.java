@@ -13,7 +13,7 @@ import init.initMethod;
 import mutacion.Contraccion;
 import mutacion.Expansion;
 import mutacion.Permutacion;
-import mutacion.SubArbol;
+import mutacion.Arbol;
 import mutacion.mutFuncional;
 import mutacion.mutTerminal;
 import mutacion.mutacion;
@@ -192,7 +192,7 @@ public class manager {
 	
 	public void setMutationFunct(int i) {
 		switch(i) {
-		case 0: algMut=new SubArbol();
+		case 0: algMut=new Arbol();
 			break;
 		case 1: algMut=new Contraccion();
 			break;		

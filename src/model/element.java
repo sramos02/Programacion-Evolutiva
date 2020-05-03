@@ -24,4 +24,5 @@ public abstract class element {
 	public abstract String toString(contador i, List<element> fenotipo);
 
 	protected abstract int evaluarExpresion(contador contador, int[] sol, List<element> fenotipo);
+
 }

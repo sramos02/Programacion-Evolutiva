@@ -18,20 +18,29 @@ public class mutTerminal extends mutacion {
 			if(prob < probMutacion){
 				Random rand = new Random();
 				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
-				List<element> aux = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
-				
-				//Fuerza a encontrar un terminal que mutar una vez decide que un individuo muta
-				while(aux.get(r).getTipo() == "funcion") {
+				List<element>  fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
+
+
+				//Se selecciona al azar un símbolo terminal dentro del individuo,
+				//se sustituye por otro diferente del conjunto de símbolos terminales posibles				
+				while(fenotipoMutado.get(r).getTipo() == "funcion") 
 			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
-				}
-			
+				
+				
 				element nuevo = new terminal(poblacion.getFuncion().getNumVariables());
 				terminal aux2 =  (terminal) nuevo;
-				
 				nuevo.setTipo("terminal");
 				nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
 				
-				aux.set(r, nuevo);
+				while(nuevo.getValor() == poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r).getValor())
+					nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));	
+				
+				//Cambiamos el genotipo
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+				
+				//Cambiamos el fenotipo
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
+				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
 			}
 		}
 	}

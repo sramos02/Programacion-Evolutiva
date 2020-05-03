@@ -2,6 +2,7 @@ package genetica;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import init.initMethod;
 import model.arbol;
 import model.contador;
@@ -12,21 +13,24 @@ public class genes {
 	private arbol genotipo; 
 	private List<element> fenotipo;
 	private initMethod algInit;
+	private int numVars;
 	
 	public genes(initMethod algInit, int numVars) {
 		this.algInit=algInit;
+		this.numVars = numVars;
 		inicializarArbol(numVars);
 		fenotipo=new ArrayList<element>();
 		genotipo.representa(fenotipo);
 	}
 
 	public genes(genes gen) {
+		numVars = gen.numVars;
 		fenotipo = gen.getFenotipoList();
 		genotipo=gen.getGenotipo();
 		algInit=gen.getAlgInit();
 	}
 	
-	private void inicializarArbol(int numVars) {
+	public void inicializarArbol(int numVars) {
 		genotipo=algInit.crearArbol(numVars);
 	}
 	
@@ -63,5 +67,13 @@ public class genes {
 	
 	public int size() {
 		return genotipo.numElem();
+	}
+
+	public int getNumVars() {
+		return numVars;
+	}
+
+	public initMethod getInit() {
+		return algInit;
 	}
 }

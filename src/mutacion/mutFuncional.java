@@ -18,18 +18,32 @@ public class mutFuncional extends mutacion{
 			if(prob < probMutacion){
 				Random rand = new Random();
 				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
-				List<element> aux = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
+				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				
-				while(aux.get(r).getTipo() == "terminal") {
+				
+				//Se selecciona al azar una función dentro del individuo, 
+				//y se sustituye por otra diferente del conjunto de funciones 
+				//posibles con el mismo número de operandos
+				while(fenotipoMutado.get(r).getTipo() == "terminal") {
 			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				}
 			
-				element nuevo = new funcion(poblacion.getUseIfs());
+				element nuevo = new funcion(poblacion.getUseIfs());	
 				funcion aux2 = (funcion) nuevo;
 				nuevo.setTipo("funcion");
 				nuevo.setValor(aux2.nuevaFuncion());
 				
-				aux.set(r, nuevo);
+				
+				while(aux2.numOperandos() == ((funcion) poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r)).numOperandos())
+					nuevo.setValor(aux2.nuevaFuncion());	
+				
+				
+				//Cambiamos el genotipo
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+				
+				//Cambiamos el fenotipo
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
+				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
 			}
 		}
 	}
