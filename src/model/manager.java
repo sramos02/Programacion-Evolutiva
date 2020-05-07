@@ -10,9 +10,6 @@ import init.Completa;
 import init.Creciente;
 import init.RampedHalf;
 import init.initMethod;
-import mutacion.Contraccion;
-import mutacion.Expansion;
-import mutacion.Permutacion;
 import mutacion.Arbol;
 import mutacion.mutFuncional;
 import mutacion.mutTerminal;
@@ -193,12 +190,6 @@ public class manager {
 	public void setMutationFunct(int i) {
 		switch(i) {
 		case 0: algMut=new Arbol();
-			break;
-		case 1: algMut=new Contraccion();
-			break;		
-		case 2: algMut= new Expansion();
-			break;
-		case 3: algMut=new Permutacion();
 			break;
 		case 4: algMut = new mutTerminal();
 			break;
