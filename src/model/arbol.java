@@ -17,6 +17,7 @@ public class arbol {
 		this.elemento=elemento;
 		numNodos = 1;
 		profundidad = 1;
+		this.aux = 0;
 	}
 	
 	public arbol(element elemento, arbol izq) {
@@ -32,8 +33,7 @@ public class arbol {
 		this.der=der;
 		numNodos = izq.numNodos + der.numNodos + 1;
 		if(izq.profundidad > der.profundidad)profundidad = izq.profundidad++;
-		else profundidad = der.profundidad++;
-		
+		else profundidad = der.profundidad++;	
 	}
 	
 	public arbol(element elemento, arbol izq, arbol der, arbol cen) {
@@ -58,6 +58,7 @@ public class arbol {
 		numNodos = old.numNodos;
 	}
 	
+
 	private int getNumeroNodos() {
 		return numNodos;
 	}
@@ -71,6 +72,10 @@ public class arbol {
 	
 	public arbol getIzq() {
 		return izq;
+	}
+	
+	public void setAux(int a) {
+		aux = a;
 	}
 	
 	public element getElemento() {
