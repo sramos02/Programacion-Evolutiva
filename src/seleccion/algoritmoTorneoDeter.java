@@ -1,5 +1,4 @@
 package seleccion;
-import java.util.Random;
 
 import model.algoritmo;
 import poblacion.poblacion;

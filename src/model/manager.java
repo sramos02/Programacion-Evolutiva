@@ -1,10 +1,7 @@
  package model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import javax.annotation.processing.FilerException;
 import cruces.*;
 import init.Completa;
 import init.Creciente;

@@ -1,6 +1,5 @@
 package init;
 
-import java.util.Random;
 import model.*;
 
 public class Completa extends initMethod{
