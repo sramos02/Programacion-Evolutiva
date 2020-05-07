@@ -8,6 +8,7 @@ import init.Creciente;
 import init.RampedHalf;
 import init.initMethod;
 import mutacion.Arbol;
+import mutacion.Permutacion;
 import mutacion.mutFuncional;
 import mutacion.mutTerminal;
 import mutacion.mutacion;
@@ -188,10 +189,12 @@ public class manager {
 		switch(i) {
 		case 0: algMut=new Arbol();
 			break;
-		case 4: algMut = new mutTerminal();
+		case 1: algMut = new mutTerminal();
 			break;
-		case 5: algMut = new mutFuncional();
+		case 2: algMut = new mutFuncional();
 			break;
+		case 3: algMut = new Permutacion();
+		break;
 		}
 	}
 	public void setInitFunct(int i) {

@@ -31,7 +31,7 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private String [] prof = {"6", "11"};
 	private String [] listaInit = {"Completa", "Ramped&Half", "Creciente"};
-	private String [] listaMut= {"SubArbol", "Terminal", "Funcional"};
+	private String [] listaMut= {"SubArbol", "Terminal", "Funcional", "Permutacion"};
 	private String [] listaCruz= {"Intercambio"};
 	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
 	
@@ -520,10 +520,13 @@ public class SetingsPanel extends JPanel implements observer{
 			ctrl.setMutationFunct(0);
 			break;
 		case "Terminal":
-			ctrl.setMutationFunct(4);
+			ctrl.setMutationFunct(1);
 			break;
 		case "Funcional":
-			ctrl.setMutationFunct(5);
+			ctrl.setMutationFunct(2);
+			break;
+		case "Permutacion":
+			ctrl.setMutationFunct(3);
 			break;
 		default:
 			break;
@@ -564,6 +567,7 @@ public class SetingsPanel extends JPanel implements observer{
 		t.setMinimumSize(d);
 		t.setAlignmentX(CENTER_ALIGNMENT);
 	}
+	
 	private void setDimButton(JButton b, Dimension d) {
 		int w=(int) d.getWidth();
 		int h=(int) d.getHeight();
