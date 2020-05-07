@@ -39,8 +39,9 @@ public class mutTerminal extends mutacion {
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
 				
 				//Cambiamos el fenotipo
-				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
+				fenotipoMutado.set(r, nuevo);
 				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
+				System.out.println();
 			}
 		}
 	}

@@ -9,6 +9,7 @@ public class arbol {
 	private arbol cen=null;
 	int numNodos;
 	int profundidad;
+	int aux;
 	
 	public arbol() {}
 	
@@ -150,7 +151,30 @@ public class arbol {
 	
 
 	public void setNodoArbol(element valor, int pos) {
-		//Introduce valor en la posicion pos
+		this.aux = 0;
+		setNodoAux(valor, pos + 1);
+	}
+
+	private void setNodoAux(element valor, int pos) {
+		aux++;
+		if(pos == aux) elemento = valor;
+		else {
+			if(izq != null) {
+				izq.aux = aux;
+				izq.setNodoAux(valor, pos);
+				aux = izq.aux;
+			}
+			if(der != null ) {
+				der.aux = aux;
+				der.setNodoAux(valor, pos);
+				aux = der.aux;
+			} 
+			if(cen != null) {
+				cen.aux = aux;
+				cen.setNodoAux(valor, pos);
+				aux = cen.aux;
+			} 		
+		}
 	}
 
 }
