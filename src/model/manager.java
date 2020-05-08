@@ -1,21 +1,16 @@
  package model;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import javax.annotation.processing.FilerException;
 import cruces.*;
 import init.Completa;
 import init.Creciente;
 import init.RampedHalf;
 import init.initMethod;
-import mutacion.Contraccion;
-import mutacion.Expansion;
+import mutacion.Arbol;
 import mutacion.Permutacion;
-import mutacion.SubArbol;
-import mutacion.Terminal;
+import mutacion.mutFuncional;
+import mutacion.mutTerminal;
 import mutacion.mutacion;
 import poblacion.individuo;
 import poblacion.poblacion;
@@ -192,16 +187,14 @@ public class manager {
 	
 	public void setMutationFunct(int i) {
 		switch(i) {
-		case 0: algMut=new SubArbol();
+		case 0: algMut=new Arbol();
 			break;
-		case 1: algMut=new Contraccion();
-			break;		
-		case 2: algMut= new Expansion();
+		case 1: algMut = new mutTerminal();
 			break;
-		case 3: algMut=new Permutacion();
+		case 2: algMut = new mutFuncional();
 			break;
-		case 4: algMut = new Terminal();
-			break;
+		case 3: algMut = new Permutacion();
+		break;
 		}
 	}
 	public void setInitFunct(int i) {

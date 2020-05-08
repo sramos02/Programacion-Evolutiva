@@ -9,6 +9,7 @@ public class arbol {
 	private arbol cen=null;
 	int numNodos;
 	int profundidad;
+	int aux;
 	
 	public arbol() {}
 	
@@ -16,6 +17,7 @@ public class arbol {
 		this.elemento=elemento;
 		numNodos = 1;
 		profundidad = 1;
+		this.aux = 0;
 	}
 	
 	public arbol(element elemento, arbol izq) {
@@ -31,8 +33,7 @@ public class arbol {
 		this.der=der;
 		numNodos = izq.numNodos + der.numNodos + 1;
 		if(izq.profundidad > der.profundidad)profundidad = izq.profundidad++;
-		else profundidad = der.profundidad++;
-		
+		else profundidad = der.profundidad++;	
 	}
 	
 	public arbol(element elemento, arbol izq, arbol der, arbol cen) {
@@ -57,6 +58,7 @@ public class arbol {
 		numNodos = old.numNodos;
 	}
 	
+
 	private int getNumeroNodos() {
 		return numNodos;
 	}
@@ -70,6 +72,10 @@ public class arbol {
 	
 	public arbol getIzq() {
 		return izq;
+	}
+	
+	public void setAux(int a) {
+		aux = a;
 	}
 	
 	public element getElemento() {
@@ -147,4 +153,33 @@ public class arbol {
 			cen.representa(ret);
 		} 
 	}
+	
+
+	public void setNodoArbol(element valor, int pos) {
+		this.aux = 0;
+		setNodoAux(valor, pos + 1);
+	}
+
+	private void setNodoAux(element valor, int pos) {
+		aux++;
+		if(pos == aux) elemento = valor;
+		else {
+			if(izq != null) {
+				izq.aux = aux;
+				izq.setNodoAux(valor, pos);
+				aux = izq.aux;
+			}
+			if(der != null ) {
+				der.aux = aux;
+				der.setNodoAux(valor, pos);
+				aux = der.aux;
+			} 
+			if(cen != null) {
+				cen.aux = aux;
+				cen.setNodoAux(valor, pos);
+				aux = cen.aux;
+			} 		
+		}
+	}
+
 }

@@ -36,4 +36,10 @@ public class terminal extends element{
 		contador.addCount();
 		return sol[valor.getPosicion()];
 	}
+
+	public String nuevoTerminal(int numVariables) {
+		Random r=new Random();
+		int pos = Math.abs(r.nextInt()%size);
+		return (size == 6)? posiblesValores[pos] : posiblesValores2[pos];
+	}
 }

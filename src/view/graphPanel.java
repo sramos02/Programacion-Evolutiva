@@ -1,10 +1,8 @@
 package view;
-import java.awt.Dimension;
-import java.util.List;
 
+import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.math.plot.Plot2DPanel;
@@ -12,10 +10,10 @@ import org.math.plot.Plot2DPanel;
 import controller.controller;
 import model.observer;
 
+@SuppressWarnings("serial")
 public class graphPanel extends JPanel implements observer {
 	private controller ctrl;
 	private Plot2DPanel plot;
-	private int tam;
 	private JLabel fitness;
 	private JTextField variables;
 	public graphPanel(controller c) {

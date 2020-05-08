@@ -94,4 +94,8 @@ public class algoritmo {
 		}
 	}
 
+	public int getNumVariables() {
+		return numVariables;
+	}
+
 }

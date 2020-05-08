@@ -16,12 +16,12 @@ public class poblacion {
 	private initMethod algInit;
 	private int numVars;
 	
-	public poblacion(int tam, algoritmo f, initMethod algInit, int numVars) {
+	public poblacion(int tam, algoritmo f, initMethod init, int numVars) {
 		poblacion=new ArrayList<individuo>();
 		this.tam=tam;
 		fun=f;
 		this.numVars=numVars;
-		this.algInit=algInit;
+		this.algInit=init;
 	}
 	
 	public poblacion(poblacion old, boolean copiarPob) {
@@ -128,4 +128,15 @@ public class poblacion {
 		return false;
 	}
 
+	public boolean getUseIfs() {
+		return algInit.useIfs();
+	}
+
+	public initMethod getAlgInit() {
+		return algInit;
+	}
+
+	public void setInit(initMethod alg) {
+		this.algInit = alg;	
+	}
 }

@@ -15,6 +15,7 @@ public class algoritmoRanking extends algoritmoSeleccion {
 		iniSeleccionados(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();
+		getSeleccionados().setInit(p.getAlgInit());
 		return getSeleccionados();
 	}
 
