@@ -17,14 +17,13 @@ public class mutTerminal extends mutacion {
 			
 			if(prob < probMutacion){
 				Random rand = new Random();
-				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				List<element>  fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
-
+				int r = rand.nextInt(fenotipoMutado.size());
 
 				//Se selecciona al azar un símbolo terminal dentro del individuo,
 				//se sustituye por otro diferente del conjunto de símbolos terminales posibles				
 				while(fenotipoMutado.get(r).getTipo() == "funcion") 
-			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
+			    	r = rand.nextInt(fenotipoMutado.size());
 				
 				
 				element nuevo = new terminal(poblacion.getFuncion().getNumVariables());

@@ -17,15 +17,15 @@ public class mutFuncional extends mutacion{
 			
 			if(prob < probMutacion){
 				Random rand = new Random();
-				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
+				int r = rand.nextInt(fenotipoMutado.size());
 				
 				
 				//Se selecciona al azar una función dentro del individuo, 
 				//y se sustituye por otra diferente del conjunto de funciones 
 				//posibles con el mismo número de operandos
 				while(fenotipoMutado.get(r).getTipo() == "terminal") {
-			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
+			    	r = rand.nextInt(fenotipoMutado.size());
 				}
 			
 				element nuevo = new funcion(poblacion.getUseIfs());	

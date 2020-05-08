@@ -16,14 +16,14 @@ public class Permutacion extends mutacion {
 			
 			if(prob < probMutacion){
 				Random rand = new Random();
-				int r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
+				int r = rand.nextInt(fenotipoMutado.size());
 
 				//Escogemos una posicion valida
 				while(fenotipoMutado.get(r).getTipo() == "terminal" || 
 						   fenotipoMutado.get(r).getValor() == "IF" || 
 						   fenotipoMutado.get(r).getValor() == "NOT") {
-			    	r = rand.nextInt(poblacion.getIndividuo(i).getSizeCromosoma());
+			    	r = rand.nextInt(fenotipoMutado.size());
 				}
 				
 				
