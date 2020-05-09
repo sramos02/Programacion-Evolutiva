@@ -20,9 +20,9 @@ public class Permutacion extends mutacion {
 				int r = rand.nextInt(fenotipoMutado.size());
 
 				//Escogemos una posicion valida
-				while(fenotipoMutado.get(r).getTipo() == "terminal" || 
-						   fenotipoMutado.get(r).getValor() == "IF" || 
-						   fenotipoMutado.get(r).getValor() == "NOT") {
+				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal") || 
+						   fenotipoMutado.get(r).getValor().equalsIgnoreCase("IF") || 
+						   fenotipoMutado.get(r).getValor().equalsIgnoreCase("NOT")) {
 			    	r = rand.nextInt(fenotipoMutado.size());
 				}
 				
@@ -45,22 +45,22 @@ public class Permutacion extends mutacion {
 	}
 
 	private arbol generaArbol(List<element> fenotipoMutado, int r) {		
-		if(fenotipoMutado.get(r).getTipo() == "terminal") {
+		if(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal")) {
 			return new arbol(fenotipoMutado.get(r));
 		}
 		else {
-			if(fenotipoMutado.get(r).getValor() == "NOT") {
+			if(fenotipoMutado.get(r).getValor().equalsIgnoreCase("NOT")) {
 				r++;
 				return new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r));	
 			}			
-			else if (fenotipoMutado.get(r).getValor() == "AND" || fenotipoMutado.get(r).getValor() == "OR") {
+			else if (fenotipoMutado.get(r).getValor().equalsIgnoreCase("AND") || fenotipoMutado.get(r).getValor().equalsIgnoreCase("OR")) {
 				r++;
 				arbol izq = new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r));
 				r++;
 				arbol der = new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r));
 				return new arbol(fenotipoMutado.get(r), izq, der);
 			}
-			else if (fenotipoMutado.get(r).getValor() == "IF") {
+			else if (fenotipoMutado.get(r).getValor().equalsIgnoreCase("IF")) {
 				arbol izq = new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r+1));
 				arbol der = new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r+2));
 				arbol cen = new arbol(fenotipoMutado.get(r), generaArbol(fenotipoMutado, r+3));

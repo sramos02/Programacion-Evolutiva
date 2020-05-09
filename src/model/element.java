@@ -6,15 +6,20 @@ public abstract class element {
 	private String valorPropio;
 	private String tipo;
 	
+	public element() {}
+	public element(element old) {
+		tipo = old.getTipo();
+		valorPropio = old.getValor();
+	}
 	public void setTipo(String t) {
 		tipo=t;
 	}
 	
 	public String getTipo() {
-		return tipo;
+		return new String(tipo);
 	}
 	public String getValor() {
-		return valorPropio;
+		return new String(valorPropio);
 	}
 	
 	public void setValor(String valor) {

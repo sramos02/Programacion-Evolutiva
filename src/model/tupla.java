@@ -9,6 +9,12 @@ public class tupla {
 		this.valor=valor;
 	}
 
+	public tupla(tupla old) {
+		posicion = old.getPosicion();
+		valor = old.getValor();
+				
+	}
+
 	public String getValor() {
 		return valor;
 	}

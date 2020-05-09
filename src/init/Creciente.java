@@ -14,9 +14,9 @@ public class Creciente extends initMethod{
 		
 		//Dependiendo de la funcion llamo al correspondiente numero de ramas
 		nodo.setIzq(recursion(profundidad-1, numVars));
-		if(nodo.getElemento().getValor() != "NOT") 
+		if(!nodo.getElemento().getValor().equalsIgnoreCase("NOT")) 
 			nodo.setDer(recursion(profundidad-1, numVars));
-		if(useIfs() && nodo.getElemento().getValor() == "IF") 
+		if(useIfs() && nodo.getElemento().getValor().equalsIgnoreCase("IF")) 
 			nodo.setCen(recursion(profundidad-1, numVars));		
 		return nodo;
 	}
@@ -39,9 +39,9 @@ public class Creciente extends initMethod{
 				nodo = new arbol(new funcion(useIfs()));
 				
 				nodo.setIzq(recursion(profundidad-1, numVars));
-				if(nodo.getElemento().getValor() != "NOT") 
+				if(!nodo.getElemento().getValor().equalsIgnoreCase("NOT")) 
 					nodo.setDer(recursion(profundidad-1, numVars));
-				if(useIfs() && nodo.getElemento().getValor() == "IF") 
+				if(useIfs() && nodo.getElemento().getValor().equalsIgnoreCase("IF")) 
 					nodo.setCen(recursion(profundidad-1, numVars));		
 			}
 		}

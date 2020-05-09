@@ -87,6 +87,7 @@ public class manager {
 			desadaptar();
 			reproduccion();
 			mutacion();
+			System.out.println();
 			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;

@@ -1,12 +1,13 @@
 package model;
 
 import java.util.List;
+import java.util.Random;
 
 public class arbol {
-	private element elemento=null;
-	private arbol izq=null;
-	private arbol der=null; 
-	private arbol cen=null;
+	private element elemento;
+	private arbol izq;
+	private arbol der; 
+	private arbol cen;
 	int numNodos;
 	int profundidad;
 	int aux;
@@ -50,14 +51,27 @@ public class arbol {
 	}
 	
 	public arbol(arbol old) {
-		elemento=old.getElemento();
-		izq=old.getIzq();
-		der=old.getDer();
-		cen=old.getCen();
+		setVariables(old);
+	}
+	
+
+	private void setVariables(arbol old) {
+		elemento=null;
+		izq=null;
+		der=null; 
+		cen=null;
+		if(old.getElemento().getTipo().equalsIgnoreCase("funcion")) {
+			elemento = new funcion(old.getElemento());
+			izq= old.getIzq() == null ? null : new arbol(old.getIzq());
+			der= old.getDer() == null ? null : new arbol(old.getDer());
+			cen= old.getCen() == null ? null : new arbol(old.getCen());
+		}
+		else {
+			elemento = new terminal(old.getElemento());
+		}
 		profundidad = old.profundidad;
 		numNodos = old.numNodos;
 	}
-	
 
 	private int getNumeroNodos() {
 		return numNodos;
@@ -102,8 +116,8 @@ public class arbol {
 		this.izq=izq;
 		numNodos+=izq.getNumeroNodos();
 		int nueva = izq.profundidad+1;
-		int profundidad1=cen!=null?cen.getProfundidad():0;
-		int profundidad2=der!=null?der.getProfundidad():0;
+		int profundidad1=cen!=null?cen.getProfundidad()+1:1;
+		int profundidad2=der!=null?der.getProfundidad()+1:1;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
@@ -111,8 +125,8 @@ public class arbol {
 		this.der=der;
 		numNodos+=der.getNumeroNodos();
 		int nueva = der.profundidad+1;
-		int profundidad1=cen!=null?cen.getProfundidad():0;
-		int profundidad2=izq!=null?izq.getProfundidad():0;
+		int profundidad1=cen!=null?cen.getProfundidad()+1:1;
+		int profundidad2=izq!=null?izq.getProfundidad()+1:1;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
@@ -120,11 +134,12 @@ public class arbol {
 		this.cen=cen;
 		numNodos+=cen.getNumeroNodos();
 		int nueva = cen.profundidad+1;
-		int profundidad1=der!=null?der.getProfundidad():0;
-		int profundidad2=izq!=null?izq.getProfundidad():0;
+		int profundidad1 = der != null ? der.getProfundidad()+1 : 1;
+		int profundidad2 = izq != null ? izq.getProfundidad()+1 : 1;
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
+	/**Devuelve la profundidad máxima de entre 3 arboles*/
 	public int getMaxProfundidad(int valor1, int valor2, int valor3) {
 		int maxProfundidad=valor1;
 		if(valor2 > maxProfundidad && valor2 > valor3) {
@@ -180,6 +195,92 @@ public class arbol {
 				aux = cen.aux;
 			} 		
 		}
+	}
+
+	public static void intercambiarNodos(double prob_func, double prob_terminal, arbol hijo1, arbol hijo2) {
+		arbol nodo=null;
+		while(nodo == null) {
+			nodo = hijo1.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+		}
+	}
+	
+	private arbol getNodo2Aleatorio(double prob_func, double prob_terminal, arbol nodo1) {
+		arbol nodo=null;
+		boolean elegido = false;
+		double valor = Math.random()%1;
+		double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
+		if(valor <= prob/2) {
+			nodo= new arbol(this);
+			elegido = true;
+		}else {
+			if(izq != null) {
+				nodo = izq.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
+			}
+			if( der != null && nodo == null) {
+				nodo = der.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
+			}
+			if( cen  != null && nodo == null) {
+				nodo = cen.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
+			}
+		}
+		if(nodo != null && elegido) {
+			//Sustituir nodo2 por nodo1
+			setVariables(nodo1);
+		}
+		recalcularPropiedades();
+		return nodo;
+	}
+	
+	/**Vuelve a calcular la profundidad y el numero de nodos de este arbol*/
+	private void recalcularPropiedades() {
+		recalcularNumNodos();
+		recalcularProfundidad();
+	}
+
+	/**Vuelve a calcular la profundidad máxima del arbol*/
+	private void recalcularProfundidad() {
+		int izq_prof = izq != null ? izq.getProfundidad()+1 : 1;
+		int cen_prof = cen != null ? cen.getProfundidad()+1 : 1;
+		int der_prof = der != null ? der.getProfundidad()+1 : 1;
+		profundidad=getMaxProfundidad(izq_prof, der_prof, cen_prof);
+	}
+
+	/**Vuelve a calcular el numero de nodos totales del arbol*/
+	private void recalcularNumNodos() {
+		numNodos = 1;
+		numNodos += izq != null ? izq.getNumeroNodos() : 0;
+		numNodos += der != null ? der.getNumeroNodos() : 0; 
+		numNodos += cen != null ? cen.getNumeroNodos() : 0; 
+	}
+
+	private arbol getNodoAleatorio(double prob_func, double prob_terminal, arbol hijo2) {
+		arbol nodo=null;
+		boolean elegido = false;
+		double valor = Math.random()%1;
+		double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
+		if(valor <= prob/2) {
+			nodo = new arbol(this);
+			elegido = true;
+		}else {
+			if(izq != null) {
+				nodo = izq.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+			}
+			if( der != null && nodo == null) {
+				nodo = der.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+			}
+			if( cen  != null && nodo == null) {
+				nodo = cen.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+			}
+		}
+		if(nodo != null && elegido) {
+			arbol nodo2=null;
+			while(nodo2 == null) {
+				nodo2 = hijo2.getNodo2Aleatorio(prob_func, prob_terminal, nodo);
+			}
+			setVariables(nodo2);
+		}
+		recalcularPropiedades();
+		return nodo;
 	}
 
 }

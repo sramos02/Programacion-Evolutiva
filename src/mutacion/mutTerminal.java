@@ -22,7 +22,7 @@ public class mutTerminal extends mutacion {
 
 				//Se selecciona al azar un símbolo terminal dentro del individuo,
 				//se sustituye por otro diferente del conjunto de símbolos terminales posibles				
-				while(fenotipoMutado.get(r).getTipo() == "funcion") 
+				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("funcion")) 
 			    	r = rand.nextInt(fenotipoMutado.size());
 				
 				
@@ -31,7 +31,7 @@ public class mutTerminal extends mutacion {
 				nuevo.setTipo("terminal");
 				nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
 				
-				while(nuevo.getValor() == poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r).getValor())
+				while(nuevo.getValor().equalsIgnoreCase(poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r).getValor()))
 					nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));	
 				
 				//Cambiamos el genotipo
