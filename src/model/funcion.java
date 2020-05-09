@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.Random;
 
 public class funcion extends element{
-	private String [] posiblesValores= {"AND", "OR", "NOT", "IF"};
-	private int size=4;
+	private final String [] posiblesValores= {"AND", "OR", "NOT", "IF"};
+	private final int size=4;
 	
 	public funcion(boolean useIfs) {
 		setTipo("funcion");
 		generarFuncion(useIfs);
 	}
 	
+	public funcion(element elemento) {
+		super(elemento);
+	}
+
 	/**Elige uno de los posibles valores(AND, OR, NOT o If) y lo devuelve*/
 	public void generarFuncion(boolean useIfs) {
 		int realSize=useIfs?4:3;
@@ -27,11 +31,11 @@ public class funcion extends element{
 		cadena+=" "+fenotipo.get(i.getCount()).getValor();
 		i.addCount();
 		cadena+=" "+fenotipo.get(i.getCount()).toString(i, fenotipo);
-		if(getValor() == "IF") {
+		if(getValor().equalsIgnoreCase("IF")) {
 			cadena+=" "+fenotipo.get(i.getCount()).toString(i, fenotipo);
 			cadena+=" "+fenotipo.get(i.getCount()).toString(i, fenotipo);
 		}
-		else if(getValor() != "NOT"){
+		else if(!getValor().equalsIgnoreCase("NOT")){
 			cadena+=" "+fenotipo.get(i.getCount()).toString(i, fenotipo);
 		}
 		cadena+=" )";
@@ -44,28 +48,42 @@ public class funcion extends element{
 		int solucion=0;
 		int a, b;
 		contador.addCount();
-		switch(getValor()) {
-		case "NOT":
+		if(getValor().equalsIgnoreCase("NOT")) {
 			solucion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo)==1? 0 : 1;
-			break;
-		case "AND":
+		}else if(getValor().equalsIgnoreCase("AND")){
 			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			solucion=a & b;
-			break;
-		case "OR":
+		}else if(getValor().equalsIgnoreCase("OR")) {
 			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			solucion=a | b;
-			break;
-		case "IF":
+		}else if(getValor().equalsIgnoreCase("IF")) {
 			int condicion=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			a=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			b=fenotipo.get(contador.getCount()).evaluarExpresion(contador, sol, fenotipo);
 			solucion = condicion == 1 ? a:b ;
-			break;
 		}
 		return solucion;
+	}
+
+	public String nuevaFuncion() {
+		Random r=new Random();
+		return posiblesValores[Math.abs(r.nextInt()%size)];
+		
+	}
+
+	public int numOperandos() {
+		
+		if(getValor().equalsIgnoreCase("NOT")) {
+			return 1;
+		}
+		else if(getValor().equalsIgnoreCase("AND") || getValor().equalsIgnoreCase("OR")) {
+			return 2;
+		} else if(getValor().equalsIgnoreCase("IF")){
+			return 3;
+		}
+		return 0;
 	}
 	
 }

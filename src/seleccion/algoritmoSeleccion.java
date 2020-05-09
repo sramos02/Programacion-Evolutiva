@@ -1,7 +1,5 @@
 package seleccion;
 
-import java.util.ArrayList;
-import java.util.List;
 import poblacion.individuo;
 import poblacion.poblacion;
 import model.algoritmo;

@@ -41,6 +41,7 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 		iniSeleccionados(pob);
 		seleccionar(pob, fun);
 		getSeleccionados().iniBest();
+		getSeleccionados().setInit(pob.getAlgInit());
 		return getSeleccionados();
 	}
 }

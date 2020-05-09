@@ -24,6 +24,7 @@ public class algoritmoEstocasticoUniv extends algoritmoSeleccion {
 		distancia=(double)1/p.getSize();
 		seleccionar(p, f);
 		getSeleccionados().iniBest();
+		getSeleccionados().setInit(p.getAlgInit());
 		return getSeleccionados();
 	}
 	@Override

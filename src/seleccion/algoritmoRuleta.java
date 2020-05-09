@@ -22,6 +22,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 		asignarProbabilidades(p);
 		seleccionar(p, f);
 		getSeleccionados().iniBest();
+		getSeleccionados().setInit(p.getAlgInit());
 		return getSeleccionados();
 	}
 	public void seleccionar(poblacion p, algoritmo f) {

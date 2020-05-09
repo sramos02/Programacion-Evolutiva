@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import view.graphPanel;
 import controller.controller;
 
+@SuppressWarnings("serial")
 public class mainWindow extends JFrame{
 	private controller ctrl;
 	private graphPanel graphPanel;
