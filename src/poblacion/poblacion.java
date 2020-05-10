@@ -139,4 +139,16 @@ public class poblacion {
 	public void setInit(initMethod alg) {
 		this.algInit = alg;	
 	}
+
+	public int getProfundidad(int individuo) {
+		return poblacion.get(individuo).getCromosoma().getGenotipo().getProfundidad();
+	}
+
+	public int getNumNodos(int individuo) {
+		return poblacion.get(individuo).getCromosoma().getGenotipo().numElem();
+	}
+
+	public int getNumVariables() {
+		return numVars;
+	}
 }

@@ -4,6 +4,14 @@ import model.*;
 
 public class Completa extends initMethod{
 
+	public Completa(initMethod old) {
+		super(old);
+	}
+
+	public Completa() {
+		super("completa");
+	}
+
 	@Override
 	public arbol crearArbol(int profundidad, int numVars) {
 		arbol nodo=null;
