@@ -3,10 +3,15 @@ package genetica;
 import java.util.ArrayList;
 import java.util.List;
 
+import init.Completa;
+import init.Creciente;
+import init.RampedHalf;
 import init.initMethod;
 import model.arbol;
 import model.contador;
 import model.element;
+import model.funcion;
+import model.terminal;
 
 public class genes {
 	
@@ -25,11 +30,33 @@ public class genes {
 
 	public genes(genes gen) {
 		numVars = gen.numVars;
-		fenotipo = gen.getFenotipoList();
-		genotipo=gen.getGenotipo();
-		algInit=gen.getAlgInit();
+		fenotipo = copiarFenotipo(gen.getFenotipoList());
+		genotipo = new arbol(gen.getGenotipo());
+		String tipo = gen.getInit().getTipo();
+		if(tipo.equalsIgnoreCase("completa")) {
+			algInit = new Completa(gen.getInit());
+		}else if(tipo.equalsIgnoreCase("creciente")) {
+			algInit = new Creciente(gen.getInit());
+		}else if(tipo.equalsIgnoreCase("ramped")) {
+			algInit = new RampedHalf(gen.getInit());
+		}
+		
 	}
 	
+	private List<element> copiarFenotipo(List<element> fenotipoList) {
+		List<element> fenotipo = new ArrayList<element>();
+		for (int i = 0; i < fenotipoList.size(); i++) {
+			if(fenotipoList.get(i).getTipo().equalsIgnoreCase("funcion")) {
+				fenotipo.add(new funcion(fenotipoList.get(i)));
+			}
+			else {
+				fenotipo.add(new terminal(fenotipoList.get(i)));
+			}
+			
+		}
+		return fenotipo;
+	}
+
 	public void inicializarArbol(int numVars) {
 		genotipo=algInit.crearArbol(numVars);
 	}
@@ -41,16 +68,9 @@ public class genes {
 		resultado+=fenotipo.get(0).toString(c, fenotipo);
 		return resultado;
 	}
-	private initMethod getAlgInit() {
-		return algInit;
-	}
-
-	public int getSizeGenotipo(){
-		return genotipo.getProfundidad();
-	}
 	
 	public List<element> getFenotipoList() {
-		return new ArrayList<element>(fenotipo);
+		return fenotipo;
 	}
 	
 	public arbol getGenotipo() {
@@ -63,10 +83,6 @@ public class genes {
 	
 	public String getFenotipo() {
 		return visualizarFenotipo();
-	}
-	
-	public int size() {
-		return genotipo.numElem();
 	}
 
 	public int getNumVars() {

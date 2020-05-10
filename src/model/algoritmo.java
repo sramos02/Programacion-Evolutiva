@@ -17,8 +17,14 @@ public class algoritmo {
 
 	public algoritmo(algoritmo viejo) {
 		adaptador=new adaptarMax(viejo.getAdaptador());
+		numVariables = viejo.getNumVariables();
+		numSelectores = viejo.getNumSelectores();
 	}
 	
+	private int getNumSelectores() {
+		return numSelectores;
+	}
+
 	private adaptacion getAdaptador() {
 		return adaptador;
 	}
@@ -89,8 +95,9 @@ public class algoritmo {
 	}
 	
 	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
+		int last=fuente.size()-1;
 		for(int i=0; i < tamElite; i++) {
-			objetivo.add(new individuo(fuente.get(i)));
+			objetivo.add(new individuo(fuente.get(last-i)));
 		}
 	}
 

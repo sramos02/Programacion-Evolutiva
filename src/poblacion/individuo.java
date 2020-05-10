@@ -17,7 +17,7 @@ public class individuo {
 	}
 	
 	public individuo(individuo ind) {
-		this.f = ind.getAlgoritmo();
+		this.f = new algoritmo(ind.getAlgoritmo());
 		cromosoma = new genes(ind.getCromosoma());
 		fitness = ind.getFitness();
 	}
@@ -42,9 +42,6 @@ public class individuo {
 		cromosoma=gen;
 	}
 	
-	public int getSizeCromosoma(){
-		return cromosoma.size();
-	}
 
 	public void setFitness(int d) {
 		fitness=d;

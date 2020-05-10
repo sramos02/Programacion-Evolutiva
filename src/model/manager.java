@@ -2,6 +2,10 @@
 
 import java.util.ArrayList;
 import java.util.List;
+
+import bloating.BienFundamentado;
+import bloating.Bloating;
+import bloating.Tarpeian;
 import cruces.*;
 import init.Completa;
 import init.Creciente;
@@ -21,7 +25,6 @@ public class manager {
 	private int valorMejor;
 	private int mejorPos;
 	private List<observer> observers;
-	
 	private algoritmoSeleccion algSel;
 	private algoritmoCruce algCruce;		
 	private mutacion algMut;
@@ -41,7 +44,8 @@ public class manager {
 	private int tamPob;
 	private boolean useIfs;
 	private int numVariables;
-
+	private Bloating algBloating;
+	
 	public manager() {
 		observers=new ArrayList<observer>();
 		funcion=new algoritmo();
@@ -59,6 +63,7 @@ public class manager {
 		numVariables=6;
 		useIfs = false;
 	}
+	
 	public void addObserver(observer o) {
 		if(!observers.contains(o)) {
 			observers.add(o);
@@ -77,6 +82,7 @@ public class manager {
 	}
 	public void start() {
 		generation=0;
+		setBloatingFunct(0);
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
@@ -87,7 +93,7 @@ public class manager {
 			desadaptar();
 			reproduccion();
 			mutacion();
-			System.out.println();
+			aplicarBloating();
 			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;
@@ -96,6 +102,9 @@ public class manager {
 		for(int i=0; i < observers.size(); i++) {
 			observers.get(i).onFinished( best, bestGen, average, bestExpresion, valorMejor, mejorPos);
 		}
+	}
+	private void aplicarBloating() {
+		algBloating.aplicarBloating(poblacion);
 	}
 	private void desadaptar() {
 		funcion.desadaptar(poblacion);
@@ -135,7 +144,7 @@ public class manager {
 	}
 	private void reproduccion() {
 		if(algCruce!=null) {
-			algCruce.cruzar(poblacion, probCruc);
+			poblacion=algCruce.cruzar(poblacion, probCruc);
 		}else {
 			System.out.println("No se ha inicializado el algoritmo de cruce");
 		}
@@ -198,6 +207,16 @@ public class manager {
 		break;
 		}
 	}
+	
+	public void setBloatingFunct(int i) {
+		switch(i) {
+		case 0: algBloating = new Tarpeian();
+			break;
+		case 1: algBloating = new BienFundamentado();
+			break;
+		}
+	}
+	
 	public void setInitFunct(int i) {
 		switch(i) {
 		case 0: algInit = new Completa();
@@ -229,6 +248,9 @@ public class manager {
 	}
 	public void setNumVars(int v) {
 		numVariables=v;
+	}
+	public int getNumVars() {
+		return numVariables;
 	}
 }
 

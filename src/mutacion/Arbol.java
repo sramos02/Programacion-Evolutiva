@@ -10,12 +10,8 @@ public class Arbol extends mutacion {
 	public void mutar(poblacion poblacion, double probMutacion) {
 		for(int i = 0; i < poblacion.getSize(); i++) {
 			double prob = Math.random()%1;
-			
 			if(prob < probMutacion){
-				int numVars = poblacion.getIndividuo(i).getCromosoma().getNumVars();
-				initMethod init = poblacion.getIndividuo(i).getCromosoma().getInit();
-				genes nuevo = new genes(init, numVars);
-				poblacion.getIndividuo(i).setGen(nuevo);
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().mutarNodo(poblacion.getAlgInit(), poblacion.getNumVariables());
 			}
 		}
 	}

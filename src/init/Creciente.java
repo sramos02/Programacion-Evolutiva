@@ -8,6 +8,16 @@ import model.terminal;
 
 public class Creciente extends initMethod{
 
+	public Creciente(initMethod old) {
+		super(old);
+	}
+
+
+	public Creciente() {
+		super("creciente");
+	}
+
+
 	@Override
 	public arbol crearArbol(int profundidad, int numVars) {
 		arbol nodo = new arbol(new funcion(useIfs()));  //El arbol siempre empieza con una funcion

@@ -1,7 +1,8 @@
 package model;
 
 import java.util.List;
-import java.util.Random;
+
+import init.initMethod;
 
 public class arbol {
 	private element elemento;
@@ -195,6 +196,32 @@ public class arbol {
 				aux = cen.aux;
 			} 		
 		}
+	}
+	
+	public void mutarNodo(initMethod ini, int numVars) {
+		while(!mutarSubArbol(ini, numVars));
+	}
+	
+	private boolean mutarSubArbol(initMethod ini, int numVars) {
+		boolean elegido = false;
+		double valor = Math.random()%1;
+		double prob = 0.5;
+		if(valor <= prob) {
+			setVariables(ini.crearArbol(profundidad-1, numVars));
+			elegido = true;
+		}else {
+			if(izq != null) {
+				elegido = izq.mutarSubArbol(ini, numVars);
+			}
+			if( der != null && !elegido) {
+				elegido = der.mutarSubArbol(ini, numVars);
+			}
+			if( cen  != null && !elegido) {
+				elegido = cen.mutarSubArbol(ini, numVars);
+			}
+		}	
+		recalcularPropiedades();
+		return elegido;
 	}
 
 	public static void intercambiarNodos(double prob_func, double prob_terminal, arbol hijo1, arbol hijo2) {

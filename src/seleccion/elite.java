@@ -32,7 +32,7 @@ public class elite {
 		
 	}
 	/**
-	 * Aï¿½ade la elite, previamente escogida, a la nueva poblaciï¿½n*/
+	 * Añade la elite, previamente escogida, a la nueva poblaciï¿½n*/
 	public void incluirElites(poblacion poblacion) {
 		int last=poblacion.getSize()-1;
 		for(int i=0; i < elite.size(); i++ ) {
