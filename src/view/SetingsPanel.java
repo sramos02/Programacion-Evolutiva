@@ -34,9 +34,12 @@ public class SetingsPanel extends JPanel implements observer{
 	private String [] listaMut= {"SubArbol", "Terminal", "Funcional", "Permutacion"};
 	private String [] listaCruz= {"Intercambio"};
 	private String [] listaSelec= {"Roulette", "Determinist Tournament", "Probabilistic Tournament","Stochastic", "Ranking", "Truncation", "Own Method"};
+	private String [] listaBloating= {"Tarpeian", "WellFundamented"};
+
 	
 	private JComboBox<String> profundidad;
 	private JComboBox<String> selectInit;
+	private JComboBox<String> selectBloating;
 	private JComboBox<String> selectSelect;
 	private JComboBox<String> selectCross;
 	private JComboBox<String> selectMut;
@@ -58,6 +61,7 @@ public class SetingsPanel extends JPanel implements observer{
 	
 	private JPanel init1;
 	private JPanel init2;
+	private JPanel init3;
 	private JPanel cross1;
 	private JPanel mut1;
 	private int popSize;
@@ -138,9 +142,9 @@ public class SetingsPanel extends JPanel implements observer{
 		 
 		 //Init----------------------------------------------------
 		 JPanel initPanel=new JPanel(new FlowLayout());
-		 initPanel.setPreferredSize(new Dimension(180, 130));
-		 initPanel.setMinimumSize(new Dimension(180, 130));
-		 initPanel.setMaximumSize(new Dimension(180, 130));		 
+		 initPanel.setPreferredSize(new Dimension(180, 160));
+		 initPanel.setMinimumSize(new Dimension(180, 160));
+		 initPanel.setMaximumSize(new Dimension(180, 160));		 
 		 initPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createSoftBevelBorder(PROPERTIES), "Initialization"));
 
 		 init1 = new JPanel();
@@ -150,16 +154,24 @@ public class SetingsPanel extends JPanel implements observer{
 		 init1.add(lInit);
 		 changeInit(listaInit);
 		 initPanel.add(init1);
-
-		 
+ 
 		 init2 = new JPanel();
-		 JLabel lInit2 = new JLabel("Profundidad");
+		 BoxLayout box02 = new BoxLayout(init2, BoxLayout.X_AXIS);
+		 JLabel lInit2 = new JLabel("Bloating");
 		 setDimLabel(lInit2, dim2);
-		 init2.add(lInit2);		 
-		 changeProf(prof);
+		 init2.add(lInit2);
+		 changeBloating(listaBloating);
 		 initPanel.add(init2);
+		 
+		 init3 = new JPanel();
+		 JLabel lInit3 = new JLabel("Profundidad");
+		 setDimLabel(lInit3, dim2);
+		 init3.add(lInit3);		 
+		 changeProf(prof);
+		 initPanel.add(init3);
+		 
 
-		 JPanel init3 = new JPanel();		 
+		 JPanel init4 = new JPanel();		 
 		 checkIf = new JCheckBox("Use of Ifs");
 		 checkIf.addItemListener(new ItemListener() {
 	            @Override
@@ -167,9 +179,10 @@ public class SetingsPanel extends JPanel implements observer{
 	                useIfs(e.getStateChange() == ItemEvent.SELECTED);
 	            }
 	        });
-		 init3.add(checkIf);
-		 initPanel.add(init3);
+		 init4.add(checkIf);
+		 initPanel.add(init4);
 		 
+	
 		 this.add(initPanel);
 		 
 		 //CrossOver----------------------------------------------------
@@ -381,15 +394,15 @@ public class SetingsPanel extends JPanel implements observer{
 		crossPer=60;
 		elitePer=5;
 		tolPer=0.0001;
-		mutPer=2;
-		popSize=100;
-		genNum=100;
+		mutPer=50;
+		popSize=200;
+		genNum=200;
 	}
 	
 	
 	private void changeProf(String[] prof2) {
 		if(profundidad != null)
-			init2.remove(selectMut);
+			init3.remove(selectMut);
 		profundidad = new JComboBox<String>(prof2);
 		profundidad.setEditable(false);
 		setNumVars(prof2[0]);
@@ -399,9 +412,9 @@ public class SetingsPanel extends JPanel implements observer{
 			}
 		 });
 		setDimCombobox(profundidad, dim2);
-		init2.add(profundidad);
-		init2.validate();
-		init2.repaint();
+		init3.add(profundidad);
+		init3.validate();
+		init3.repaint();
 		this.repaint();
 	}
 
@@ -429,7 +442,25 @@ public class SetingsPanel extends JPanel implements observer{
 		 this.repaint();
 	}
 
+	 private void changeBloating(String[] selec) {
+			if(selectBloating!=null)
+				init2.remove(selectBloating);
+			selectBloating = new JComboBox<String>(selec);
+			selectBloating.setEditable(false);
+			 seleccionarInit(selec[0]);
+			 selectBloating.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						seleccionarBloating((String)selectBloating.getSelectedItem());
+					}
+			 });
+			 setDimCombobox(selectBloating, dim2);
+			 init2.add(selectBloating);
+			 init2.validate();
+			 init2.repaint();
+			 this.repaint();
+		}
 	
+
 	public void changeMut(String [] selec) {
 		if(selectMut!=null)
 			mut1.remove(selectMut);
@@ -533,6 +564,20 @@ public class SetingsPanel extends JPanel implements observer{
 		}
 	}
 	
+	protected void seleccionarBloating(String bloating) {
+		switch(bloating){
+		case "Tarpeian":
+			ctrl.setBloating(0);
+			break;
+		case "WellFundamented":
+			ctrl.setBloating(1);
+			break;
+		default:
+			break;
+		}	
+	}
+
+	
 	private void seleccionarInit(String in) {
 		switch(in){
 		case "Completa":
@@ -548,6 +593,8 @@ public class SetingsPanel extends JPanel implements observer{
 			break;
 		}
 	}
+	
+	
 
 	private void setDimLabel(JLabel l, Dimension d) {
 		int w=(int) d.getWidth();

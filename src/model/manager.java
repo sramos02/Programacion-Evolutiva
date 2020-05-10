@@ -82,7 +82,6 @@ public class manager {
 	}
 	public void start() {
 		generation=0;
-		setBloatingFunct(0);
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
