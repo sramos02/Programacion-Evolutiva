@@ -32,5 +32,11 @@ public class Completa extends initMethod{
 			nodo=new arbol(new terminal(numVars));
 		}
 		return nodo;
+	}
+
+	@Override
+	public void setPropiedades(int size) {
+		// TODO Auto-generated method stub
+		
 	}	
 }

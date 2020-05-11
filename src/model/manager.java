@@ -71,6 +71,7 @@ public class manager {
 	}
 
 	public void iniciarPoblacion() {
+		algInit.setPropiedades(tamPob);
 		algInit.setUseIfs(useIfs);
 		funcion.setNumVariables(numVariables);
 		poblacion=new poblacion(tamPob, funcion, algInit, numVariables);
@@ -82,7 +83,6 @@ public class manager {
 	}
 	public void start() {
 		generation=0;
-		setBloatingFunct(0);
 		iniciarPoblacion();
 		evaluarPoblacion();
 		generation++;
@@ -92,8 +92,8 @@ public class manager {
 			seleccion();
 			desadaptar();
 			reproduccion();
-			mutacion();
 			aplicarBloating();
+			mutacion();
 			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;

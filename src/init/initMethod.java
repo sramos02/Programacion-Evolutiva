@@ -28,4 +28,8 @@ public abstract class initMethod {
 	public String getTipo() {
 		return tipo;
 	}
+	public int getProfundidad() {
+		return maxProfundidad;
+	}
+	public abstract void setPropiedades(int size);
 }

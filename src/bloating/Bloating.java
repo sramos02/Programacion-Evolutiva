@@ -3,7 +3,7 @@ package bloating;
 import poblacion.poblacion;
 
 public abstract class Bloating {
-	private int k;
+	private double k;
 	private double probabilidad = 0.5;
 
 	public Bloating() {}
@@ -17,11 +17,11 @@ public abstract class Bloating {
 		this.probabilidad = probabilidad;
 	}
 
-	public int getK() {
+	public double getK() {
 		return k;
 	}
 
-	public void setK(int k) {
+	public void setK(double k) {
 		this.k = k;
 	}
 }

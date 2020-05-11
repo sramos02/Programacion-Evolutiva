@@ -44,7 +44,7 @@ public class algoritmoRuleta extends algoritmoSeleccion{
 			double prob=0;
 			prob=p.getIndividuo(i).getFitness()/totalFitness;
 			if(i > 0) {
-				prob +=probSeleccion.get(i-1);
+				prob += probSeleccion.get(i-1);
 			}
 			probSeleccion.add(prob);
 		}
