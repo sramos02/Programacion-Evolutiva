@@ -447,7 +447,7 @@ public class SetingsPanel extends JPanel implements observer{
 				init2.remove(selectBloating);
 			selectBloating = new JComboBox<String>(selec);
 			selectBloating.setEditable(false);
-			 seleccionarInit(selec[0]);
+			 seleccionarBloating(selec[0]);
 			 selectBloating.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						seleccionarBloating((String)selectBloating.getSelectedItem());
