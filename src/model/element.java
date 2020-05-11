@@ -11,6 +11,10 @@ public abstract class element {
 		tipo = old.getTipo();
 		valorPropio = old.getValor();
 	}
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 	public void setTipo(String t) {
 		tipo=t;
 	}

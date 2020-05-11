@@ -6,6 +6,10 @@ import java.util.List;
 import bloating.BienFundamentado;
 import bloating.Bloating;
 import bloating.Tarpeian;
+<<<<<<< Updated upstream
+=======
+import bloating.Bloating;
+>>>>>>> Stashed changes
 import cruces.*;
 import init.Completa;
 import init.Creciente;
@@ -92,8 +96,13 @@ public class manager {
 			seleccion();
 			desadaptar();
 			reproduccion();
+<<<<<<< Updated upstream
 			aplicarBloating();
 			mutacion();
+=======
+			mutacion();
+			//aplicarBloating();
+>>>>>>> Stashed changes
 			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;
