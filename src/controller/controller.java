@@ -66,4 +66,8 @@ public class controller {
 	public void setNumVars(int v) {
 		manager.setNumVars(v);
 	}
+
+	public void setBloating(int i) {
+		manager.setBloatingFunct(i);
+	}
 }
