@@ -15,11 +15,7 @@ public class funcion extends element{
 	public funcion(element elemento) {
 		super(elemento);
 	}
-<<<<<<< Updated upstream
 
-=======
-	
->>>>>>> Stashed changes
 	/**Elige uno de los posibles valores(AND, OR, NOT o If) y lo devuelve*/
 	public void generarFuncion(boolean useIfs) {
 		int realSize=useIfs?4:3;

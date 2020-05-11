@@ -15,7 +15,6 @@ public class terminal extends element{
 		generarTerminal();
 	}
 	
-<<<<<<< Updated upstream
 	public terminal(element old) {
 		super(old);
 		size= ((terminal) old).getSize();
@@ -30,12 +29,7 @@ public class terminal extends element{
 		return size;
 	}
 
-=======
-	public terminal(element elemento) {
-		super(elemento);
-	}
 	
->>>>>>> Stashed changes
 	/**Elige uno de los posibles valores(A0, A1, D0, D1, D2 o D3)
 	 *  y lo devuelve*/
 	public void generarTerminal() {

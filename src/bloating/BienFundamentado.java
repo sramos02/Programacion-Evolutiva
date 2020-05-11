@@ -25,9 +25,4 @@ public class BienFundamentado extends Bloating{
 			}
 		}
 	}
-	
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

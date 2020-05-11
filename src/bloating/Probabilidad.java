@@ -45,8 +45,4 @@ public class Probabilidad {
 		}
 		return (total/poblacion.getSize());
 	}
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

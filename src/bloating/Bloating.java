@@ -24,8 +24,4 @@ public abstract class Bloating {
 	public void setK(double k) {
 		this.k = k;
 	}
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

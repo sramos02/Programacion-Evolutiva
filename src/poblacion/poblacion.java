@@ -144,7 +144,6 @@ public class poblacion {
 		return poblacion.get(individuo).getCromosoma().getGenotipo().getProfundidad();
 	}
 
-<<<<<<< Updated upstream
 	public int getNumNodos(int individuo) {
 		return poblacion.get(individuo).getCromosoma().getGenotipo().numElem();
 	}
@@ -152,9 +151,7 @@ public class poblacion {
 	public int getNumVariables() {
 		return numVars;
 	}
-
-=======
->>>>>>> Stashed changes
+	
 	public int getFitness(int individuo) {
 		return poblacion.get(individuo).getFitness();
 	}
