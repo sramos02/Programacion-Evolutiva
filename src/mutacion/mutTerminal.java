@@ -42,6 +42,8 @@ public class mutTerminal extends mutacion {
 				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
 				System.out.println();
 			}
+			poblacion.getIndividuo(i).calcularFenotipo();
+			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 }

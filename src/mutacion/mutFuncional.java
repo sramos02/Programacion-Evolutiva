@@ -45,6 +45,8 @@ public class mutFuncional extends mutacion{
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
 				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
 			}
+			poblacion.getIndividuo(i).calcularFenotipo();
+			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 }

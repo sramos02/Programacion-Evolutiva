@@ -41,6 +41,7 @@ public class Permutacion extends mutacion {
 				
 				
 			}
+			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 
