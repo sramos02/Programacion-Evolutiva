@@ -15,8 +15,8 @@ public class Tarpeian extends Bloating{
 			int profundidad = poblacion.getProfundidad(i);
 			double valor = Math.random()%1;
 			if(profundidad > media && valor <= getProbabilidad()) {
-				int fit = poblacion.getIndividuo(i).getFitness() - 
-						getK() * poblacion.getProfundidad(i);
+				int fit = (int) (poblacion.getIndividuo(i).getFitness() - 
+						getK() * poblacion.getProfundidad(i));
 				poblacion.getIndividuo(i).setFitness(fit);
 			}
 		}

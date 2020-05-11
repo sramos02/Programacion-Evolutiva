@@ -36,7 +36,7 @@ public class adaptarMax extends adaptacion{
 		setAdaptado(false);
 		double valor;
 		for(int i=0; i < p.getSize(); i++) {
-			valor=p.getIndividuo(i).getFitness() - getLimit();
+			valor=(p.getIndividuo(i).getFitness() - getLimit());
 			p.getIndividuo(i).setFitness((int)valor);
 		}
 	}

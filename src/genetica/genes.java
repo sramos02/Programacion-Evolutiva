@@ -38,7 +38,7 @@ public class genes {
 		}else if(tipo.equalsIgnoreCase("creciente")) {
 			algInit = new Creciente(gen.getInit());
 		}else if(tipo.equalsIgnoreCase("ramped")) {
-			algInit = new RampedHalf(gen.getInit());
+			algInit = new RampedHalf((RampedHalf)gen.getInit());
 		}
 		
 	}

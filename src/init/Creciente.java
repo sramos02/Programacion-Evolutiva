@@ -61,5 +61,12 @@ public class Creciente extends initMethod{
 	}
 
 
+	@Override
+	public void setPropiedades(int size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
