@@ -42,7 +42,10 @@ public class individuo {
 		cromosoma=gen;
 	}
 	
-
+	public void calcularFenotipo() {
+		cromosoma.calcularFenotipo();
+	}
+	
 	public void setFitness(int d) {
 		fitness=d;
 	}

@@ -11,7 +11,6 @@ public abstract class element {
 		tipo = old.getTipo();
 		valorPropio = old.getValor();
 	}
-
 	public void setTipo(String t) {
 		tipo=t;
 	}

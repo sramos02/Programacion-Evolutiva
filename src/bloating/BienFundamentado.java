@@ -25,4 +25,5 @@ public class BienFundamentado extends Bloating{
 			}
 		}
 	}
+	
 }

@@ -6,7 +6,7 @@ import java.util.Random;
 import model.element;
 import model.terminal;
 import poblacion.poblacion;
-
+	
 public class mutTerminal extends mutacion {
 
 	@Override
@@ -16,6 +16,7 @@ public class mutTerminal extends mutacion {
 			double prob = Math.random()%1;
 			
 			if(prob < probMutacion){
+				poblacion.getIndividuo(i).calcularFenotipo();
 				Random rand = new Random();
 				List<element>  fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
@@ -25,23 +26,19 @@ public class mutTerminal extends mutacion {
 				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("funcion")) 
 			    	r = rand.nextInt(fenotipoMutado.size());
 				
-				
 				element nuevo = new terminal(poblacion.getFuncion().getNumVariables());
 				terminal aux2 =  (terminal) nuevo;
-				nuevo.setTipo("terminal");
-				nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
-				
-				while(nuevo.getValor().equalsIgnoreCase(poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r).getValor()))
-					nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));	
-				
-				//Cambiamos el genotipo
+
+				while(nuevo.getValor().equalsIgnoreCase(poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r).getValor())) {
+					nuevo.setValor(aux2.nuevoTerminal(poblacion.getFuncion().getNumVariables()));
+					aux2 =  (terminal) nuevo;
+				}
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
-				
-				//Cambiamos el fenotipo
-				fenotipoMutado.set(r, nuevo);
-				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
-				System.out.println();
 			}
+			//Calculamos el nuevo Fitness
+			poblacion.getIndividuo(i).calcularFenotipo();
+			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
+	
 }

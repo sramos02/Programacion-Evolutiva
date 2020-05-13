@@ -151,7 +151,7 @@ public class poblacion {
 	public int getNumVariables() {
 		return numVars;
 	}
-	
+
 	public int getFitness(int individuo) {
 		return poblacion.get(individuo).getFitness();
 	}

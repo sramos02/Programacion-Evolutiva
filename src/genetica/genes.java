@@ -84,7 +84,11 @@ public class genes {
 	public String getFenotipo() {
 		return visualizarFenotipo();
 	}
-
+	public void calcularFenotipo() {
+		fenotipo=new ArrayList<element>();
+		genotipo.representa(fenotipo);
+	}
+	
 	public int getNumVars() {
 		return numVars;
 	}

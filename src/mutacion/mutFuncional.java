@@ -24,27 +24,25 @@ public class mutFuncional extends mutacion{
 				//Se selecciona al azar una función dentro del individuo, 
 				//y se sustituye por otra diferente del conjunto de funciones 
 				//posibles con el mismo número de operandos
-				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal")) {
+				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal")) 
 			    	r = rand.nextInt(fenotipoMutado.size());
-				}
+				
 			
 				element nuevo = new funcion(poblacion.getUseIfs());	
 				funcion aux2 = (funcion) nuevo;
-				nuevo.setTipo("funcion");
-				nuevo.setValor(aux2.nuevaFuncion());
 				
-				
-				while(aux2.numOperandos() == ((funcion) poblacion.getIndividuo(i).getCromosoma().getFenotipoList().get(r)).numOperandos())
-					nuevo.setValor(aux2.nuevaFuncion());	
-				
-				
-				//Cambiamos el genotipo
+				while(aux2.numOperandos() == ((funcion) fenotipoMutado.get(r)).numOperandos() && aux2.getValor().equalsIgnoreCase(fenotipoMutado.get(r).getValor())) {
+					nuevo.setValor(aux2.nuevaFuncion());
+					aux2 =  (funcion) nuevo;					
+				}
+					
+				//Cambiamos el genotipo y el fenotipo
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
-				
-				//Cambiamos el fenotipo
-				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
-				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
+
 			}
+			//Calculamos el nuevo Fitness
+			poblacion.getIndividuo(i).calcularFenotipo();
+			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 }

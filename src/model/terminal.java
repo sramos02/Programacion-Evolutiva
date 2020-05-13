@@ -29,7 +29,6 @@ public class terminal extends element{
 		return size;
 	}
 
-	
 	/**Elige uno de los posibles valores(A0, A1, D0, D1, D2 o D3)
 	 *  y lo devuelve*/
 	public void generarTerminal() {
