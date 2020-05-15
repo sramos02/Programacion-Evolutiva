@@ -13,9 +13,9 @@ public class mutFuncional extends mutacion{
 	public void mutar(poblacion poblacion, double probMutacion) {
 		
 		for(int i = 0; i < poblacion.getSize(); i++) {
-			double prob = Math.random()%1;
-			
+			double prob = Math.random()%1;			
 			if(prob < probMutacion){
+				poblacion.getIndividuo(i).calcularFenotipo();
 				Random rand = new Random();
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
@@ -31,6 +31,7 @@ public class mutFuncional extends mutacion{
 				element nuevo = new funcion(poblacion.getUseIfs());	
 				funcion aux2 = (funcion) nuevo;
 				
+<<<<<<< Updated upstream
 				while(aux2.numOperandos() == ((funcion) fenotipoMutado.get(r)).numOperandos() && aux2.getValor().equalsIgnoreCase(fenotipoMutado.get(r).getValor())) {
 					nuevo.setValor(aux2.nuevaFuncion());
 					aux2 =  (funcion) nuevo;					
@@ -38,6 +39,16 @@ public class mutFuncional extends mutacion{
 					
 				//Cambiamos el genotipo y el fenotipo
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+=======
+				while(aux2.numOperandos() != ((funcion) fenotipoMutado.get(r)).numOperandos()) {
+					//while(aux2.getValor().equalsIgnoreCase(fenotipoMutado.get(r).getValor())) {
+					nuevo.setValor(aux2.nuevaFuncion());
+					aux2 =  (funcion) nuevo;						
+				}
+					
+				//Cambiamos el genotipo y el fenotipo
+				//poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+>>>>>>> Stashed changes
 
 			}
 			//Calculamos el nuevo Fitness
