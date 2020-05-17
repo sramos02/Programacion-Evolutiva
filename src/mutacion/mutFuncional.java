@@ -30,26 +30,17 @@ public class mutFuncional extends mutacion{
 			
 				element nuevo = new funcion(poblacion.getUseIfs());	
 				funcion aux2 = (funcion) nuevo;
-				
-<<<<<<< Updated upstream
-				while(aux2.numOperandos() == ((funcion) fenotipoMutado.get(r)).numOperandos() && aux2.getValor().equalsIgnoreCase(fenotipoMutado.get(r).getValor())) {
-					nuevo.setValor(aux2.nuevaFuncion());
-					aux2 =  (funcion) nuevo;					
-				}
-					
-				//Cambiamos el genotipo y el fenotipo
-				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
-=======
+
 				while(aux2.numOperandos() != ((funcion) fenotipoMutado.get(r)).numOperandos()) {
 					//while(aux2.getValor().equalsIgnoreCase(fenotipoMutado.get(r).getValor())) {
 					nuevo.setValor(aux2.nuevaFuncion());
 					aux2 =  (funcion) nuevo;						
 				}
+
 					
 				//Cambiamos el genotipo y el fenotipo
-				//poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
->>>>>>> Stashed changes
-
+				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+					
 			}
 			//Calculamos el nuevo Fitness
 			poblacion.getIndividuo(i).calcularFenotipo();
