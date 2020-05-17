@@ -21,9 +21,9 @@ public class mutFuncional extends mutacion{
 				int r = rand.nextInt(fenotipoMutado.size());
 				
 				
-				//Se selecciona al azar una funciï¿½n dentro del individuo, 
+				//Se selecciona al azar una función dentro del individuo, 
 				//y se sustituye por otra diferente del conjunto de funciones 
-				//posibles con el mismo nï¿½mero de operandos
+				//posibles con el mismo número de operandos
 				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal")) 
 			    	r = rand.nextInt(fenotipoMutado.size());
 				

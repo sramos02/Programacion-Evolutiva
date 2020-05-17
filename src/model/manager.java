@@ -89,9 +89,9 @@ public class manager {
 		while(generation < maxIter) {
 			aplicarBloating();
 			elite.escogerElites(poblacion, probElite);
-			adaptar();
+			//adaptar();
 			seleccion();
-			desadaptar();
+			//desadaptar();
 			reproduccion();
 			mutacion();
 			elite.incluirElites(poblacion);

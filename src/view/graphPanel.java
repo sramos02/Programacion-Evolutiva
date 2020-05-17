@@ -3,6 +3,7 @@ package view;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.math.plot.Plot2DPanel;
@@ -30,15 +31,14 @@ public class graphPanel extends JPanel implements observer {
 		plot.setPreferredSize(new Dimension(700,600));
 		plot.setMinimumSize(new Dimension(700,600));
 		plot.setMaximumSize(new Dimension(700,600));
-		
-		this.setPreferredSize(new Dimension(700,600));
-		this.setMinimumSize(new Dimension(700,600));
-		this.setMaximumSize(new Dimension(700,600));
 		this.add(plot);
 		
 		fitness=new JLabel("Fitness: ");
-		variables=new JTextField("Variables: ");
-		variables.setEditable(false);
+		variables=new JTextField("Mejor: ");
+		variables.setMaximumSize(new Dimension(800, 60));
+		variables.setMinimumSize(new Dimension(600, 60));
+		variables.setPreferredSize(new Dimension(700, 60));
+		this.add(new JScrollPane(variables));
 		this.add(fitness);
 		this.add(variables);
 		this.setVisible(true);
@@ -53,6 +53,7 @@ public class graphPanel extends JPanel implements observer {
 		plot.addLinePlot("Media generación", average[0], average[1]);
 		fitness.setText("Pos: " + pos);
 		variables.setText("Mejor: " + bestResult);
+		this.add(new JScrollPane(variables));
 		this.repaint();
 	}
 	@Override

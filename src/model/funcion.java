@@ -70,7 +70,6 @@ public class funcion extends element{
 	public String nuevaFuncion() {
 		Random r=new Random();
 		return posiblesValores[Math.abs(r.nextInt()%size)];
-		
 	}
 
 	public int numOperandos() {

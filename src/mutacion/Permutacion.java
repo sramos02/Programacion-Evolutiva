@@ -18,30 +18,21 @@ public class Permutacion extends mutacion {
 				Random rand = new Random();
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
-
+				int cont = 0;
 				//Escogemos una posicion valida
-				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal") || 
+				while(cont < 10 && (fenotipoMutado.get(r).getTipo().equalsIgnoreCase("terminal") || 
 						   fenotipoMutado.get(r).getValor().equalsIgnoreCase("IF") || 
-						   fenotipoMutado.get(r).getValor().equalsIgnoreCase("NOT")) {
+						   fenotipoMutado.get(r).getValor().equalsIgnoreCase("NOT") )) {
 			    	r = rand.nextInt(fenotipoMutado.size());
+			    	cont++;//Por si solo hay ifs o nots
 				}
-				
-				
-				int cont = r;
-				arbol aux = generaArbol(fenotipoMutado, cont).getIzq();
-				
-				//ux -> Rama izq
-				//Rama izq = Rama drc
-				//Rama drc = aux
-
-				
-				//Cambiamos el fenotipo
-				poblacion.getIndividuo(i).getCromosoma().getGenotipo().representa(fenotipoMutado);
-				poblacion.getIndividuo(i).getCromosoma().setFenotipo(fenotipoMutado);
-				
-				
+				if(cont < 10) {
+					poblacion.getIndividuo(i).getCromosoma().getGenotipo().permutarHijos(r);
+					//Cambiamos el fenotipo
+					poblacion.getIndividuo(i).calcularFenotipo();
+					poblacion.getIndividuo(i).calcularFitness();
+				}
 			}
-			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 

@@ -122,6 +122,14 @@ public class arbol {
 		profundidad=getMaxProfundidad(nueva, profundidad1, profundidad2);
 	}
 	
+	public void copiaIzq(arbol i) {
+		izq = i;
+	}
+	
+	public void copiaDer(arbol d) {
+		der = d;
+	}
+
 	public void setDer(arbol der) {
 		this.der=der;
 		numNodos+=der.getNumeroNodos();
@@ -310,4 +318,38 @@ public class arbol {
 		return nodo;
 	}
 
+	private arbol encontrarNodo(int r) {
+		contador i = new contador();
+		return encontrarNodo(r,i);
+	}
+
+	private arbol encontrarNodo(int r, contador i) {
+		arbol nodo=null;
+		if(r == i.getCount()) {
+			nodo = this;
+		}else {
+			
+			if(izq != null) {
+				i.addCount();
+				nodo = izq.encontrarNodo(r, i);
+			}
+			if(der != null && nodo == null) {
+				i.addCount();
+				nodo = der.encontrarNodo(r, i);
+			}
+			if(cen != null && nodo == null) {
+				i.addCount();
+				nodo = cen.encontrarNodo(r, i);
+			}
+		}
+		return nodo;
+	}
+
+	public void permutarHijos(int r) {
+		arbol padre = encontrarNodo(r);
+		arbol aux = new arbol(padre.getIzq());
+		padre.copiaIzq(new arbol(padre.getDer()));
+		padre.copiaDer(new arbol(aux));
+		//padre.recalcularPropiedades();
+	}
 }
