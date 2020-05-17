@@ -2,7 +2,7 @@ package init;
 import model.arbol;
 
 public abstract class initMethod {
-	private int maxProfundidad=3;
+	private int maxProfundidad=4;
 	private boolean useIfs;
 	private String tipo;
 	
