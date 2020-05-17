@@ -164,7 +164,7 @@ public class SetingsPanel extends JPanel implements observer{
 		 initPanel.add(init2);
 		 
 		 init3 = new JPanel();
-		 JLabel lInit3 = new JLabel("Profundidad");
+		 JLabel lInit3 = new JLabel("Entradas");
 		 setDimLabel(lInit3, dim2);
 		 init3.add(lInit3);		 
 		 changeProf(prof);
