@@ -25,6 +25,8 @@ public class Intercambio extends algoritmoCruce{
 			//Intercambiar dichos nodos
 			arbol.intercambiarNodos(prob_func, prob_terminal, 
 				hijo1.getCromosoma().getGenotipo(), hijo2.getCromosoma().getGenotipo());
+			hijo1.calcularFenotipo();
+			hijo2.calcularFenotipo();
 			hijo1.calcularFitness();
 			hijo2.calcularFitness();
 			setDescendienteAt(i, hijo1);
