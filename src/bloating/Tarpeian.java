@@ -10,9 +10,12 @@ public class Tarpeian extends Bloating{
 		setK(k);
 	}
 	
+	
+	//Elimina aquellos programas de longitud mayor que la media
 	@Override
 	public void aplicarBloating(poblacion poblacion) {
 		int media = calcularProfMedia(poblacion);
+		
 		for(int i=0; i < poblacion.getSize(); i++) {
 			int profundidad = poblacion.getProfundidad(i);
 			double valor = Math.random()%1;

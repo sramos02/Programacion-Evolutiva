@@ -396,7 +396,7 @@ public class SetingsPanel extends JPanel implements observer{
 		tolPer=0.0001;
 		mutPer=50;
 		popSize=200;
-		genNum=200;
+		genNum=500;
 	}
 	
 	
