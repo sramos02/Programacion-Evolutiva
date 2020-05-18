@@ -12,11 +12,11 @@ public class algoritmo {
 	private int numSelectores;
 	
 	public algoritmo() {
-		adaptador=new adaptarMax();
+		adaptador=new adaptacion();
 	}
 
 	public algoritmo(algoritmo viejo) {
-		adaptador=new adaptarMax(viejo.getAdaptador());
+		adaptador=new adaptacion(viejo.getAdaptador());
 		numVariables = viejo.getNumVariables();
 		numSelectores = viejo.getNumSelectores();
 	}

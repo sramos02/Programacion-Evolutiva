@@ -1,8 +1,11 @@
 package model;
 
 public class contador {
-	private int cont=0;
+	private int cont;
 	
+	public contador() {
+		cont=0;
+	}
 	public void addCount() {
 		cont++;
 	}

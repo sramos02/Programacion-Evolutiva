@@ -21,8 +21,8 @@ public class mutTerminal extends mutacion {
 				List<element>  fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
 
-				//Se selecciona al azar un símbolo terminal dentro del individuo,
-				//se sustituye por otro diferente del conjunto de símbolos terminales posibles				
+				//Se selecciona al azar un sï¿½mbolo terminal dentro del individuo,
+				//se sustituye por otro diferente del conjunto de sï¿½mbolos terminales posibles				
 				while(fenotipoMutado.get(r).getTipo().equalsIgnoreCase("funcion")) 
 			    	r = rand.nextInt(fenotipoMutado.size());
 				

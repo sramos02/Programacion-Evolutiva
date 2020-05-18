@@ -22,11 +22,11 @@ public class Probabilidad {
 		int sumatorio = 0;
 		int size = poblacion.getSize();
 		for (int i = 0; i < size; i++) {
-			int profundidad = poblacion.getProfundidad(i);
-			int fit = poblacion.getFitness(i);
+			int profundidad = poblacion.getProfundidad(i)-prof_media;
+			int fit = poblacion.getFitness(i)-fitnes_medio;
 			sumatorio += profundidad * fit;
 		}
-		resultado = sumatorio/size - fitnes_medio*prof_media;
+		resultado = sumatorio/size;
 		return resultado;
 	}
 	
