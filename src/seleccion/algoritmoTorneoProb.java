@@ -10,7 +10,6 @@ public class algoritmoTorneoProb extends algoritmoTorneo{
 	
 	public algoritmoTorneoProb() {
 		super("torneoProb");
-		// TODO Auto-generated constructor stub
 	}
 
 	private double p;
