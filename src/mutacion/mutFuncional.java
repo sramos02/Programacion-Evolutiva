@@ -15,7 +15,14 @@ public class mutFuncional extends mutacion{
 		for(int i = 0; i < poblacion.getSize(); i++) {
 			double prob = Math.random()%1;			
 			if(prob < probMutacion){
-				poblacion.getIndividuo(i).calcularFenotipo();
+				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
+
+				for(int u = 0; u < fenotipoMutado.size(); u++) {
+					System.out.print(fenotipoMutado.get(u).getValor() + " ");
+				}
+				System.out.println();
+				
+				/*poblacion.getIndividuo(i).calcularFenotipo();
 				Random rand = new Random();
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
@@ -47,7 +54,7 @@ public class mutFuncional extends mutacion{
 						
 					//Cambiamos el genotipo y el fenotipo
 					poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
-				}				
+				}				*/
 			}
 			//Calculamos el nuevo Fitness
 			poblacion.getIndividuo(i).calcularFenotipo();

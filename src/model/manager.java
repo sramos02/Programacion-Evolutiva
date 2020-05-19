@@ -45,6 +45,7 @@ public class manager {
 	private boolean useIfs;
 	private int numVariables;
 	private Bloating algBloating;
+	private int mejorResultado;
 	
 	public manager() {
 		observers=new ArrayList<observer>();
@@ -57,11 +58,12 @@ public class manager {
 		probElite=0.05;
 		generation=0;
 		probCruc=0.6;
-		probMut=0.02;
+		probMut=0.0;
 		maxIter=100;
 		tamPob=100;
 		numVariables=6;
 		useIfs = false;
+		mejorResultado = 0;
 	}
 	
 	public void addObserver(observer o) {
@@ -100,7 +102,7 @@ public class manager {
 		}
 		
 		for(int i=0; i < observers.size(); i++) {
-			observers.get(i).onFinished( best, bestGen, average, bestExpresion, valorMejor, mejorPos);
+			observers.get(i).onFinished(mejorResultado, best, bestGen, average, bestExpresion, valorMejor, mejorPos);
 		}
 	}
 	private void aplicarBloating() {
@@ -135,6 +137,7 @@ public class manager {
 			best[1][generation]=bestGen[1][generation];
 			mejorPos=generation;
 			individuo mejor=poblacion.getMejorInd();
+			mejorResultado = mejor.getFitness();
 			bestExpresion=mejor.getExpresion();
 		}
 		else

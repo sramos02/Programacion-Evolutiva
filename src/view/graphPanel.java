@@ -33,10 +33,10 @@ public class graphPanel extends JPanel implements observer {
 		plot.setMaximumSize(new Dimension(700,600));
 		this.add(plot);
 		
-		fitness=new JLabel("Fitness: ");
+		fitness=new JLabel("Fitness & pos: ");
 		variables=new JTextField("Mejor: ");
-		variables.setMaximumSize(new Dimension(800, 60));
-		variables.setMinimumSize(new Dimension(600, 60));
+		variables.setMaximumSize(new Dimension(700, 60));
+		variables.setMinimumSize(new Dimension(700, 60));
 		variables.setPreferredSize(new Dimension(700, 60));
 		this.add(new JScrollPane(variables));
 		this.add(fitness);
@@ -46,16 +46,17 @@ public class graphPanel extends JPanel implements observer {
 	}
 	
 	@Override
-	public void onFinished(double[][] best, double[][] bestGen, double[][] average, String bestResult, int mejorEsperado, int pos) {
+	public void onFinished(int bestFitness, double[][] best, double[][] bestGen, double[][] average, String bestResult, int mejorEsperado, int pos) {
 		plot.removeAllPlots();
 		plot.addLinePlot("Mejor absoluto", best[0], best[1]);
 		plot.addLinePlot("Mejor generación", bestGen[0], bestGen[1]);
 		plot.addLinePlot("Media generación", average[0], average[1]);
-		fitness.setText("Pos: " + pos);
+		fitness.setText("Best fitness: " + bestFitness + "  |  Pos: " + pos);
 		variables.setText("Mejor: " + bestResult);
 		this.add(new JScrollPane(variables));
 		this.repaint();
 	}
+
 	@Override
 	public void onNextGeneration() {
 		// TODO Auto-generated method stub

@@ -235,7 +235,7 @@ public class arbol {
 	public static void intercambiarNodos(double prob_func, double prob_terminal, arbol hijo1, arbol hijo2) {
 		arbol nodo=null;
 		while(nodo == null) {
-			nodo = hijo1.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+			nodo = hijo1.getNodoAleatorio(true, /*prob_func, prob_terminal*/0.1, 0.9, hijo2);
 		}
 	}
 	
@@ -288,23 +288,25 @@ public class arbol {
 		numNodos += cen != null ? cen.getNumeroNodos() : 0; 
 	}
 
-	private arbol getNodoAleatorio(double prob_func, double prob_terminal, arbol hijo2) {
+	private arbol getNodoAleatorio(boolean esRaiz, double prob_func, double prob_terminal, arbol hijo2) {
 		arbol nodo=null;
 		boolean elegido = false;
 		double valor = Math.random()%1;
 		double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
-		if(valor <= prob/2) {
-			nodo = new arbol(this);
-			elegido = true;
+		//if(!esRaiz) {
+			if(valor <= prob/2) {
+				nodo = new arbol(this);
+				elegido = true;
+			//}
 		}else {
 			if(izq != null) {
-				nodo = izq.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+				nodo = izq.getNodoAleatorio(false, prob_func, prob_terminal, hijo2);
 			}
 			if( der != null && nodo == null) {
-				nodo = der.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+				nodo = der.getNodoAleatorio(false, prob_func, prob_terminal, hijo2);
 			}
 			if( cen  != null && nodo == null) {
-				nodo = cen.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+				nodo = cen.getNodoAleatorio(false, prob_func, prob_terminal, hijo2);
 			}
 		}
 		if(nodo != null && elegido) {
