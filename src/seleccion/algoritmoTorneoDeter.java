@@ -7,7 +7,6 @@ public class algoritmoTorneoDeter extends algoritmoTorneo{
 
 	public algoritmoTorneoDeter() {
 		super("torneoDeter");
-		// TODO Auto-generated constructor stub
 	}
 
 	public poblacion ini(poblacion p, algoritmo f) {
