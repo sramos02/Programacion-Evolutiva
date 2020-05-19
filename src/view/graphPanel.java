@@ -53,7 +53,6 @@ public class graphPanel extends JPanel implements observer {
 		plot.addLinePlot("Media generación", average[0], average[1]);
 		fitness.setText("Pos: " + pos);
 		variables.setText("Mejor: " + bestResult);
-		this.add(new JScrollPane(variables));
 		this.repaint();
 	}
 	@Override
