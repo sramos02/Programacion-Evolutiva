@@ -24,12 +24,12 @@ public class adaptacion {
 			}
 		}
 		valor = valor * c;
-		limit = valor;
+		limit = (int)valor;
 		
 		//Ajusta el resultado
 		for(int i=0; i < p.getSize(); i++) {
 			individuo ind=p.getIndividuo(i);
-			ind.setFitness((int)(limit + ind.getFitness()));
+			ind.setFitness((int)(ind.getFitness() + limit));
 		}
 	}
 	

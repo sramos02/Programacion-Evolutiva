@@ -77,21 +77,23 @@ public class algoritmo {
 	}
 	
 	public boolean best(double fitness, double fitness2) {
-		if(adaptador.getAdaptado()) {
+		return fitness > fitness2;
+		/*if(adaptador.getAdaptado()) {
 			return fitness < fitness2;
 		}
 		else {
 			return fitness > fitness2;
-		}
+		}*/
 	}
 
 	public boolean worst(double fitness, double fitness2) {
-		if(adaptador.getAdaptado()) {
+		return fitness < fitness2;
+		/*if(adaptador.getAdaptado()) {
 			return fitness > fitness2;
 		}
 		else {
 			return fitness < fitness2;
-		}
+		}*/
 	}
 	
 	public void addElite(List<individuo> objetivo, List<individuo> fuente, double tamElite) {
