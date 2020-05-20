@@ -89,13 +89,13 @@ public class manager {
 		evaluarPoblacion();
 		generation++;
 		while(generation < maxIter) {
-			aplicarBloating();
 			elite.escogerElites(poblacion, probElite);
-			//adaptar();
+			adaptar();
 			seleccion();
-			//desadaptar();
+			desadaptar();
 			reproduccion();
 			mutacion();
+			aplicarBloating();
 			elite.incluirElites(poblacion);
 			evaluarPoblacion();
 			generation++;

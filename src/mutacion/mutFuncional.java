@@ -26,8 +26,6 @@ public class mutFuncional extends mutacion{
 				Random rand = new Random();
 				List<element> fenotipoMutado = poblacion.getIndividuo(i).getCromosoma().getFenotipoList();
 				int r = rand.nextInt(fenotipoMutado.size());
-				
-				
 				//Se selecciona al azar una función dentro del individuo, 
 				//y se sustituye por otra diferente del conjunto de funciones 
 				//posibles con el mismo número de operandos
