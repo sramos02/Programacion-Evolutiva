@@ -234,36 +234,39 @@ public class arbol {
 
 	public static void intercambiarNodos(double prob_func, double prob_terminal, arbol hijo1, arbol hijo2) {
 		arbol nodo=null;
-		prob_func = 1;
-		prob_terminal = 0;
+		boolean esRaiz = true;
 		
 		while(nodo == null) {
-			nodo = hijo1.getNodoAleatorio(prob_func, prob_terminal, hijo2);
+			nodo = hijo1.getNodoAleatorio(esRaiz, prob_func, prob_terminal, hijo2);
 		}
 	}
 	
-	private arbol getNodo2Aleatorio(double prob_func, double prob_terminal, arbol nodo1) {
+	private arbol getNodo2Aleatorio(boolean esRaiz2, double prob_func, double prob_terminal, arbol nodo1) {
 		arbol nodo=null;	
-
 		boolean elegido = false;
-		double valor = Math.random()%1;
-		double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
 
-		if(valor <= prob/2) {
-			nodo= new arbol(this);
-			elegido = true;
+		if(!esRaiz2) {
+			double valor = Math.random()%1;
+			double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
+
+			if(valor <= prob/2) {
+				nodo= new arbol(this);
+				elegido = true;
+			}
+			else {
+				if(izq != null) {
+					nodo = izq.getNodo2Aleatorio(esRaiz2, prob_func, prob_terminal, nodo1);
+				}
+				if( der != null && nodo == null) {
+					nodo = der.getNodo2Aleatorio(esRaiz2, prob_func, prob_terminal, nodo1);
+				}
+				if( cen  != null && nodo == null) {
+					nodo = cen.getNodo2Aleatorio(esRaiz2, prob_func, prob_terminal, nodo1);
+				}
+			}
 		}
-		else {
-			if(izq != null) {
-				nodo = izq.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
-			}
-			if( der != null && nodo == null) {
-				nodo = der.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
-			}
-			if( cen  != null && nodo == null) {
-				nodo = cen.getNodo2Aleatorio(prob_func, prob_terminal, nodo1);
-			}
-		}
+		else esRaiz2 = false;
+		
 		if(nodo != null && elegido) {
 			//Sustituir nodo2 por nodo1
 			setVariables(nodo1);
@@ -295,34 +298,38 @@ public class arbol {
 		numNodos += cen != null ? cen.getNumeroNodos() : 0; 
 	}
 
-	private arbol getNodoAleatorio(double prob_func, double prob_terminal, arbol hijo2) {
+	private arbol getNodoAleatorio(boolean esRaiz, double prob_func, double prob_terminal, arbol hijo2) {
 		arbol nodo=null;
 		boolean elegido = false;
 		
-		double valor = Math.random()%1;
-		double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
-		
-		if(valor <= prob/2) {
-			nodo = new arbol(this);
-			elegido = true;
+		if(!esRaiz) {
+			double valor = Math.random()%1;
+			double prob = elemento.getTipo().equalsIgnoreCase("funcion") ? prob_func : prob_terminal;
+
+			if(valor <= prob/2) {
+				nodo = new arbol(this);
+				elegido = true;
+			}
+			else {
+				if(izq != null) {
+					nodo = izq.getNodoAleatorio(esRaiz, prob_func, prob_terminal, hijo2);
+				}
+				if( der != null && nodo == null) {
+					nodo = der.getNodoAleatorio(esRaiz, prob_func, prob_terminal, hijo2);
+				}
+				if( cen  != null && nodo == null) {
+					nodo = cen.getNodoAleatorio(esRaiz, prob_func, prob_terminal, hijo2);
+				}
+			}
+
 		}
-		else {
-			if(izq != null) {
-				nodo = izq.getNodoAleatorio(prob_func, prob_terminal, hijo2);
-			}
-			if( der != null && nodo == null) {
-				nodo = der.getNodoAleatorio(prob_func, prob_terminal, hijo2);
-			}
-			if( cen  != null && nodo == null) {
-				nodo = cen.getNodoAleatorio(prob_func, prob_terminal, hijo2);
-			}
-		}
-		
-	
+		else esRaiz = false;
+			
 		if(nodo != null && elegido) {
 			arbol nodo2=null;
+			boolean esRaiz2 = true;
 			while(nodo2 == null) {
-				nodo2 = hijo2.getNodo2Aleatorio(prob_func, prob_terminal, nodo);
+				nodo2 = hijo2.getNodo2Aleatorio(esRaiz2, prob_func, prob_terminal, nodo);
 			}
 			setVariables(nodo2);
 		}
