@@ -12,9 +12,9 @@ public class Arbol extends mutacion {
 			double prob = Math.random()%1;
 			if(prob < probMutacion){
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().mutarNodo(poblacion.getAlgInit(), poblacion.getNumVariables());
+				poblacion.getIndividuo(i).calcularFenotipo();
+				poblacion.getIndividuo(i).calcularFitness();
 			}
-			poblacion.getIndividuo(i).calcularFenotipo();
-			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 

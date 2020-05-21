@@ -39,10 +39,10 @@ public class mutFuncional extends mutacion{
 
 				//Cambiamos el genotipo y el fenotipo
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+				//Calculamos el nuevo Fitness
+				poblacion.getIndividuo(i).calcularFenotipo();
+				poblacion.getIndividuo(i).calcularFitness();
 			}				
-			//Calculamos el nuevo Fitness
-			poblacion.getIndividuo(i).calcularFenotipo();
-			poblacion.getIndividuo(i).calcularFitness();
 		}
 
 	}

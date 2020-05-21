@@ -58,11 +58,11 @@ public class manager {
 		probElite=0.05;
 		generation=0;
 		probCruc=0.6;
-		probMut=0.0;
-		maxIter=100;
-		tamPob=100;
+		probMut=0.05;
+		maxIter=200;
+		tamPob=200;
 		numVariables=6;
-		useIfs = false;
+		useIfs = true;
 		mejorResultado = 0;
 	}
 	
