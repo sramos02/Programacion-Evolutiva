@@ -257,7 +257,7 @@ public class SetingsPanel extends JPanel implements observer{
 		setDimLabel(lMut2, dim2);
 		mut2.add(lMut2);
 
-		tMut=new JTextField("8");
+		tMut=new JTextField(mutPer+"");
 		setDimText(tMut, dim2);
 		tMut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -280,7 +280,7 @@ public class SetingsPanel extends JPanel implements observer{
 		setDimLabel(lElite, dim2);
 		elitePanel.add(lElite);
 
-		tElite=new JTextField("5");
+		tElite=new JTextField(elitePer+"");
 		setDimText(tElite, dim2);
 		tElite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -292,7 +292,9 @@ public class SetingsPanel extends JPanel implements observer{
 
 
 		//Botones-------------------------------------------------
-		this.add(Box.createRigidArea(new Dimension(190, 20)));
+		JPanel botonPanel=new JPanel();
+		BoxLayout box6=new BoxLayout(botonPanel, BoxLayout.X_AXIS);
+		this.add(Box.createRigidArea(new Dimension(190, 10)));
 		start = new JButton();
 		start.setIcon(new ImageIcon("icons/start.png"));
 		start.setToolTipText("Start");
@@ -302,9 +304,7 @@ public class SetingsPanel extends JPanel implements observer{
 				start();
 			} 
 		});
-		this.add(start);
-
-		this.add(Box.createRigidArea(new Dimension(190, 20)));
+		botonPanel.add(start);
 		reset = new JButton();
 		reset.setIcon(new ImageIcon("icons/reset.png"));
 		reset.setToolTipText("Reset");
@@ -313,11 +313,12 @@ public class SetingsPanel extends JPanel implements observer{
 			public void actionPerformed(ActionEvent e) {
 				ctrl.reset();
 				initFields();
+				checkIf.setSelected(true);
 				refreshText();
 			} 
 		});
-		this.add(reset);
-
+		botonPanel.add(reset);
+		this.add(botonPanel);
 		this.setVisible(true);
 	}
 
@@ -408,9 +409,10 @@ public class SetingsPanel extends JPanel implements observer{
 		crossPer=60;
 		elitePer=5;
 		tolPer=0.0001;
-		mutPer=80;
+		mutPer=5;
 		popSize=200;
-		genNum=300;
+		genNum=200;
+		useIfs(true);
 	}
 
 

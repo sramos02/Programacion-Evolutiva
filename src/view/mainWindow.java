@@ -31,9 +31,9 @@ public class mainWindow extends JFrame{
 		controlPanel=new SetingsPanel(ctrl);
 		this.add(controlPanel, BorderLayout.WEST);
 		
-		this.setPreferredSize(new Dimension(900,800));
-		this.setMinimumSize(new Dimension(900,800));
-		this.setMaximumSize(new Dimension(1200,900));
+		this.setPreferredSize(new Dimension(900,740));
+		this.setMinimumSize(new Dimension(900,740));
+		this.setMaximumSize(new Dimension(900,740));
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // Al cerrarlo se termina la aplicación.
 		this.setLocationRelativeTo(null);

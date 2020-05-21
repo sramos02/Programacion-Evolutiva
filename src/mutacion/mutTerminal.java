@@ -34,10 +34,10 @@ public class mutTerminal extends mutacion {
 					aux2 =  (terminal) nuevo;
 				}
 				poblacion.getIndividuo(i).getCromosoma().getGenotipo().setNodoArbol(nuevo, r);
+				//Calculamos el nuevo Fitness
+				poblacion.getIndividuo(i).calcularFenotipo();
+				poblacion.getIndividuo(i).calcularFitness();
 			}
-			//Calculamos el nuevo Fitness
-			poblacion.getIndividuo(i).calcularFenotipo();
-			poblacion.getIndividuo(i).calcularFitness();
 		}
 	}
 	
